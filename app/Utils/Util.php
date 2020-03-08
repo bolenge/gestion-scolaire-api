@@ -17,20 +17,19 @@
         protected $locales;
 
         /**
-         * L'objet dont on renvoi après qu'une requête est lancée
-         * 
          * @OA\Schema(
          *      schema="objetRetour",
          *      description="Objet retour de résultats uax requêtes",
          *      @OA\Property(type="boolean", property="success"),
          *      @OA\Property(type="string", property="message"),
+         *      @OA\Property(type="object", property="errors"),
          *      @OA\Property(type="object", property="results")
          * )
          */
         protected $objetRetour = [
             'success' => false,
             'message' => '',
-            'errors' => '',
+            'errors' => null,
             'results' => null
         ];
 
@@ -40,6 +39,25 @@
         public function utilConstruct()
         {
             // debug("Le __contruct du trait est lancé");
+        }
+
+        /**
+         * Permet de traquer les erreurs
+         * @return void
+         */
+        public function trackErrors()
+        {
+            if (session()->has('errors')) {
+                $errors = session('errors');
+                $this->objetRetour['errors'] = $errors;
+
+                if (empty($this->objetRetour['message'])) {
+                    $errorsValues = array_values($errors);
+                    $this->objetRetour['message'] = \implode('<br/>', $errorsValues);
+                }
+                
+                session()->remove('errors');
+            }
         }
     }
     

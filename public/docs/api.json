@@ -97,6 +97,50 @@
                     }
                 }
             }
+        },
+        "/ecoles/desactiveEcole/{id}": {
+            "delete": {
+                "tags": [
+                    "Ecoles"
+                ],
+                "summary": "Permet de désactiver une école",
+                "operationId": "App\\Controllers\\EcolesController::desactiveEcole",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/ecoles/activeEcole/{id}": {
+            "put": {
+                "tags": [
+                    "Ecoles"
+                ],
+                "summary": "Permet de d'activer une école",
+                "operationId": "App\\Controllers\\EcolesController::activeEcole",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -105,15 +149,15 @@
                 "description": "Objet retour de résultats uax requêtes",
                 "properties": {
                     "success": {
-                        "description": "L'objet dont on renvoi après qu'une requête est lancée",
                         "type": "boolean"
                     },
                     "message": {
-                        "description": "L'objet dont on renvoi après qu'une requête est lancée",
+                        "type": "string"
+                    },
+                    "errors": {
                         "type": "string"
                     },
                     "results": {
-                        "description": "L'objet dont on renvoi après qu'une requête est lancée",
                         "type": "object"
                     }
                 },
