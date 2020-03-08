@@ -6,6 +6,7 @@
     
     $router = new Router;
 
-    $router->get('/', 'PagesController@index');
+    $router->post('/createEcole', 'EcolesController@createEcole');
+    $router->put('/updateEcole/:id', 'EcolesController@updateEcole');
 
     return $router;

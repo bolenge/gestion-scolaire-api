@@ -6,6 +6,7 @@
     
     $router = new Router;
 
-    $router->get('/', 'PagesController@index');
+    $router->get('/', 'ApplicationsController@index');
+    $router->get('/docs', 'ApplicationsController@docs');
 
     return $router;

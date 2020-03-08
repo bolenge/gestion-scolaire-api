@@ -6,6 +6,7 @@
     
     $router = new Router;
 
-    $router->get('/', 'PagesController@index');
+    $router->post('/login', 'AdminsController@login');
+    $router->get('/getAdminInfos/:id', 'AdminsController@getAdminInfos');
 
     return $router;

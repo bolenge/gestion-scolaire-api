@@ -16,11 +16,19 @@
         protected $error;
 
         /**
+         * La localisation (langue)
+         * @var array
+         */
+        protected $locales;
+
+        /**
          * Renvoi l'erreur traquée
          * @return void
          */
         public function getError()
         {
+            $this->locales = \locales('app')['errors'];
+
             if (!empty($error = $this->error)) {
                 $error = 'error'.$error;
                 $this->$error();
@@ -33,11 +41,13 @@
          */
         public function error404()
         {
-            $errors_path = \config('path.errors');
-            $errors_layout = $errors_path.'.error';
+            // $errors_path = \config('path.errors');
+            // $errors_layout = $errors_path.'.error';
 
-            $this->response->setTemplate($errors_layout);
-            $this->response->render($errors_path.'.404', [], 404);
+            // $this->response->setTemplate($errors_layout);
+            // $this->response->render($errors_path.'.404', [], 404);
+
+            $this->response->json(['message' => $this->locales['404']], [], 404);
         }
 
         /**

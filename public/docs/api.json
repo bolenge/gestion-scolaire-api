@@ -1,0 +1,230 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Gestion scolaire",
+        "version": "0.1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "API de Gestion Scolaire, developpé par UHTec"
+        }
+    ],
+    "paths": {
+        "/admins/login": {
+            "post": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Permet de faire connecté un admin",
+                "operationId": "App\\Controllers\\AdminsController::login",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/adminLogin"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/admins/getAdminInfos/{id}": {
+            "get": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Renvoi les informations d'un admin",
+                "operationId": "App\\Controllers\\AdminsController::getAdminInfos",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/ecoles/createEcole": {
+            "post": {
+                "tags": [
+                    "Ecoles"
+                ],
+                "summary": "Permet de créer une nouvelle école",
+                "operationId": "App\\Controllers\\EcolesController::createEcole",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/ecoleRequestBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/ecoles/updateEcole/{id}": {
+            "put": {
+                "tags": [
+                    "Ecoles"
+                ],
+                "summary": "Permet de modifier les données d'une école",
+                "operationId": "App\\Controllers\\EcolesController::updateEcole",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/ecoleRequestBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "objetRetour": {
+                "description": "Objet retour de résultats uax requêtes",
+                "properties": {
+                    "success": {
+                        "description": "L'objet dont on renvoi après qu'une requête est lancée",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "description": "L'objet dont on renvoi après qu'une requête est lancée",
+                        "type": "string"
+                    },
+                    "results": {
+                        "description": "L'objet dont on renvoi après qu'une requête est lancée",
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "responses": {
+            "NotFoundResponse": {
+                "description": "La ressource n'existe pas",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "La ressource n'existe pas"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "SuccessResponse": {
+                "description": "La ressource n'existe pas",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/objetRetour"
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "id": {
+                "name": "id",
+                "in": "path",
+                "description": "ID de la ressource",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requestBodies": {
+            "adminLogin": {
+                "description": "Les données à renseigner",
+                "required": true,
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "required": [
+                                "username",
+                                "password"
+                            ],
+                            "properties": {
+                                "username": {
+                                    "description": "Les règles sur des requêtes qu'on peut bien lancer",
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "description": "Les règles sur des requêtes qu'on peut bien lancer",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "ecoleRequestBody": {
+                "description": "Les données à renseigner pour la création d'une école",
+                "required": true,
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "required": [
+                                "nom",
+                                "telephone",
+                                "localite",
+                                "num_agrement"
+                            ],
+                            "properties": {
+                                "nom": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "email"
+                                },
+                                "website": {
+                                    "type": "url"
+                                },
+                                "telephone": {
+                                    "type": "tel"
+                                },
+                                "localite": {
+                                    "type": "string"
+                                },
+                                "num_agrement": {
+                                    "type": "string"
+                                },
+                                "id_media_logo": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
