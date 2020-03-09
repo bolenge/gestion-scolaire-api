@@ -31,13 +31,13 @@
                 }
             }
         },
-        "/admins/getAdminInfos/{id}": {
+        "/admins/getAdminById/{id}": {
             "get": {
                 "tags": [
                     "Admins"
                 ],
                 "summary": "Renvoi les informations d'un admin",
-                "operationId": "App\\Controllers\\AdminsController::getAdminInfos",
+                "operationId": "App\\Controllers\\AdminsController::getAdminById",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/id"
@@ -155,7 +155,7 @@
                         "type": "string"
                     },
                     "errors": {
-                        "type": "string"
+                        "type": "object"
                     },
                     "results": {
                         "type": "object"

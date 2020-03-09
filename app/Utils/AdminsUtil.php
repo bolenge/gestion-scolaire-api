@@ -11,8 +11,6 @@
         use Util;
 
         /**
-         * Les règles sur des requêtes qu'on peut bien lancer
-         * 
          * @OA\RequestBody(
          * 		request="adminLogin",
          * 		description="Les données à renseigner",
@@ -34,5 +32,13 @@
             'username' => 'required|min:3|max:100|alpha',
             'password' => 'required|min:6'
         ];
+
+        /**
+         * Réprésente le __construct de ce trait
+         */
+        public function traitAdminsUtilContruct()
+        {
+            $this->locales = \locales('app')['admins'];
+        }
     }
     

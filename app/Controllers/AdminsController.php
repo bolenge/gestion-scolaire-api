@@ -9,7 +9,7 @@
     use Ekolo\Framework\Http\Response;
     
     use App\Utils\AdminsUtil;
-    use App\Models\AdminsModel;
+    use App\Repositories\AdminsRepository;
 
     /**
      * Controlleur pour les admins
@@ -17,6 +17,15 @@
     class AdminsController extends Controller {
 
         use AdminsUtil;
+        use AdminsRepository;
+
+        /**
+         * Les méthodes considerées comme des __contruct des traits
+         */
+        protected $traitsContructs = [
+            'traitAdminsUtilContruct',
+            'traitAdminsRepositoryContruct'
+        ];
 
         /**
          * Permet de faire connecté un admin
@@ -37,9 +46,6 @@
          */
         public function login(Request $request, Response $response)
         {
-            $this->model = new AdminsModel;
-            $this->locales = \locales('app')['admins'];
-
             if ($request->validator($this->rules)) {
                 $admin = $this->model->findOne([
                     'cond' => 'username="'.$request->body()->username().'"'
@@ -63,25 +69,14 @@
                 }
             }
 
-            if (session()->has('errors')) {
-                $errors = session('errors');
-                $this->objetRetour['errors'] = $errors;
-
-                if (empty($this->objetRetour['message'])) {
-                    $errorsValues = array_values($errors);
-                    $this->objetRetour['message'] = \implode('<br/>', $errorsValues);
-                }
-                
-                session()->remove('errors');
-            }
-
+            $this->trackErrors();
             $response->json($this->objetRetour);
         }
 
         /**
          * Renvoi les informations d'un admin
          * @OA\Get(
-         *      path="/admins/getAdminInfos/{id}",
+         *      path="/admins/getAdminById/{id}",
          *      tags={"Admins"},
          *      @OA\Parameter(ref="#/components/parameters/id"),
          *      @OA\Response(
@@ -94,9 +89,9 @@
          *      )
          * )
          */
-        public function getAdminInfos(Request $request, Response $response)
+        public function getAdminById(Request $request, Response $response)
         {
-            debug($_GET);
+            
         }
 
     }
