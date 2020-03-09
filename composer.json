@@ -6,7 +6,7 @@
         }
     },
     "require": {
-        "ekolo/ekolo-framework": "^0.2.6",
-        "zircote/swagger-php": "^3.0"
+        "zircote/swagger-php": "^3.0",
+        "ekolo/ekolo-framework": "^0.3.3"
     }
 }
