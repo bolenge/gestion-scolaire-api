@@ -54,9 +54,10 @@
                 }
 
                 if ($request->body()->id_media_logo() && !$this->model->exists('id', $request->body()->id_media_logo(), 'medias')) {
-                    session()->set('errors', [
+                    $errors = session()->has('errors') ? session()->get('errors') : [];
+                    session()->set('errors', \array_merge($errors, [
                         'id_media_logo' => $this->locales['create']['id_media_logo_invalid']
-                    ]);
+                    ]));
                 }
 
                 if (!session()->has('errors')) {

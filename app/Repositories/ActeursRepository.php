@@ -7,26 +7,26 @@
     use Ekolo\Framework\Http\Response;
 
     use App\Repositories\Repository;
-    use App\Models\AdminsModel;
+    use App\Models\ActeursModel;
 
     /**
      * Repository pour les admins
      */
-    trait AdminsRepository
+    trait ActeursRepository
     {
         use Repository;
 
         /**
          * Réprésente le __construct de ce trait
          */
-        public function traitAdminsRepositoryContruct()
+        public function traitActeursRepositoryContruct()
         {
-            $this->model = new AdminsModel;
-            $this->table = 'admins';
+            $this->model = new ActeursModel;
+            $this->table = 'acteurs';
         }
 
         /**
-         * Permet de savegarder les informations d'un admin
+         * Permet de savegarder les informations d'un acteur
          * @param Request $request instance de Ekolo\Framework\Http\Request
          * @param Response $response instance de Ekolo\Framework\Http\Response
          * @return mixed
@@ -34,14 +34,21 @@
         public function save(Request $request, Response $response)
         {
             $data = [
-                'role' => $request->body()->role(),
-                'username' => $request->body()->username(),
-                'password' => bcrypt_hash_password($request->body()->password()),
-                'id_acteur' => $request->body()->id_acteur()
+                'nom' => $request->body()->nom(),
+                'sexe' => $request->body()->sexe(),
+                'email' => $request->body()->email(),
+                'prenom' => $request->body()->prenom(),
+                'postnom' => $request->body()->postnom(),
+                'telephone' => $request->body()->telephone(),
+                'etat_civil' => $request->body()->etat_civil()
             ];
 
             if (!empty($request->body()->id())) {
                 $data['id'] = $request->body()->id();
+            }
+
+            if (!empty($request->body()->id_adresse())) {
+                $data['id_adresse'] = $request->body()->id_adresse();
             }
 
             return $this->model->save($data, $this->table);

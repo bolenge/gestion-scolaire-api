@@ -11,6 +11,26 @@
         }
     ],
     "paths": {
+        "/acteurs/createActeur": {
+            "post": {
+                "tags": [
+                    "Acteurs"
+                ],
+                "summary": "Permet de créer un nouvel acteur",
+                "operationId": "App\\Controllers\\ActeursController::createActeur",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/createActeurRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
         "/admins/login": {
             "post": {
                 "tags": [
@@ -43,6 +63,51 @@
                         "$ref": "#/components/parameters/id"
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/admins/createAdmin": {
+            "post": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Permet de créer un nouvel admin",
+                "operationId": "App\\Controllers\\AdminsController::createAdmin",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/createAdminRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/admins/updateAdmin/{id}": {
+            "put": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Permet de créer un nouvel admin",
+                "operationId": "App\\Controllers\\AdminsController::updateAdmin",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/createAdminRequest"
+                },
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/SuccessResponse"
@@ -204,6 +269,48 @@
             }
         },
         "requestBodies": {
+            "createActeurRequest": {
+                "description": "Les données à renseigner",
+                "required": true,
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "required": [
+                                "nom",
+                                "email",
+                                "sexe"
+                            ],
+                            "properties": {
+                                "nom": {
+                                    "type": "string"
+                                },
+                                "sexe": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "prenom": {
+                                    "type": "string"
+                                },
+                                "postnom": {
+                                    "type": "string"
+                                },
+                                "telephone": {
+                                    "type": "string"
+                                },
+                                "etat_civil": {
+                                    "type": "string"
+                                },
+                                "id_adresse": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
             "adminLogin": {
                 "description": "Les données à renseigner",
                 "required": true,
@@ -216,12 +323,41 @@
                             ],
                             "properties": {
                                 "username": {
-                                    "description": "Les règles sur des requêtes qu'on peut bien lancer",
                                     "type": "string"
                                 },
                                 "password": {
-                                    "description": "Les règles sur des requêtes qu'on peut bien lancer",
                                     "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "createAdminRequest": {
+                "description": "Les données à renseigner",
+                "required": true,
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "required": [
+                                "username",
+                                "password",
+                                "id_acteur",
+                                "role"
+                            ],
+                            "properties": {
+                                "role": {
+                                    "type": "string"
+                                },
+                                "username": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                },
+                                "id_acteur": {
+                                    "type": "integer"
                                 }
                             },
                             "type": "object"

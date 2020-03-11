@@ -6,7 +6,9 @@
     
     $router = new Router;
 
+    $router->get('/getAdminById/:id', 'AdminsController@getAdminById');
     $router->post('/login', 'AdminsController@login');
-    $router->get('/getAdminInfos/:id', 'AdminsController@getAdminInfos');
+    $router->post('/createAdmin', 'AdminsController@createAdmin');
+    $router->put('/updateAdmin/:id', 'AdminsController@updateAdmin');
 
     return $router;
