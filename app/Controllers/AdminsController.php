@@ -243,4 +243,115 @@
             $this->trackErrors();
             $response->json($this->objetRetour);
         }
+
+        /**
+         * Permet de désactiver un admin
+         * 
+         * @OA\Delete(
+         *      path="/admins/desactiveAdmin/{id}",
+         *      tags={"Admins"},
+         *      @OA\Parameter(ref="#/components/parameters/id"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function desactiveAdmin(Request $request, Response $response)
+        {   
+            $request->body()->set('id', $request->params()->get('id'));
+            
+            if ($request->validator($this->rulesCreating)) {
+                if (!empty($admin = $this->model->findOneById($request->body()->get('id')))) {
+                    
+                    if ($admin->flag == "0") {
+                        session()->set('errors', [
+                            'warning' => $this->locales['desactive']['already_desactived']
+                        ]);
+                    }else {
+                        $result = $this->model->update([
+                            'id' => $request->body()->get('id'),
+                            'flag' => "0"
+                        ]);
+
+                        if ($result) {
+                            $this->objetRetour['success'] = true;
+                            $this->objetRetour['message'] = $this->locales['desactive']['success'];
+                            $this->objetRetour['results'] = $result;
+                        }else {
+                            session()->set('errors', [
+                                'warning' => $this->locales['desactive']['warning']
+                            ]);
+                        }
+                    }
+                }else {
+                    \session()->set('errors', [
+                        'warning' => $this->locales['find']['nothing']
+                    ]);
+                }
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
+
+        /**
+         * Permet de d'activer un admin
+         * 
+         * @OA\Put(
+         *      path="/admins/activeAdmin/{id}",
+         *      tags={"Admins"},
+         *      @OA\Parameter(ref="#/components/parameters/id"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function activeAdmin(Request $request, Response $response)
+        {   
+            $request->body()->set('id', $request->params()->get('id'));
+            
+            if ($request->validator($this->rulesCreating)) {
+                if (!empty($admin = $this->model->findOneById($request->body()->get('id')))) {
+                    
+                    if ($admin->flag == "1") {
+                        session()->set('errors', [
+                            'warning' => $this->locales['active']['already_actived']
+                        ]);
+                    }else {
+                        $result = $this->model->update([
+                            'id' => $request->body()->get('id'),
+                            'flag' => "1"
+                        ]);
+
+                        if ($result) {
+                            $admin->flag = "1";
+                            $this->objetRetour['success'] = true;
+                            $this->objetRetour['message'] = $this->locales['active']['success'];
+                            $this->objetRetour['results'] = $admin;
+                        }else {
+                            session()->set('errors', [
+                                'warning' => $this->locales['active']['warning']
+                            ]);
+                        }
+                    }
+                }else {
+                    \session()->set('errors', [
+                        'warning' => $this->locales['find']['nothing']
+                    ]);
+                }
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
     }

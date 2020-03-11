@@ -118,6 +118,50 @@
                 }
             }
         },
+        "/admins/desactiveAdmin/{id}": {
+            "delete": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Permet de désactiver un admin",
+                "operationId": "App\\Controllers\\AdminsController::desactiveAdmin",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/admins/activeAdmin/{id}": {
+            "put": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Permet de d'activer un admin",
+                "operationId": "App\\Controllers\\AdminsController::activeAdmin",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
         "/ecoles/createEcole": {
             "post": {
                 "tags": [

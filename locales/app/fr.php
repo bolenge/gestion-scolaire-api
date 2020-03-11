@@ -34,7 +34,19 @@
                 'success' => "Modification de l'admin faite avec succès",
                 'warning' => "Une erreur est survenue lors de la mofication de l'admin ".$error_persiste,
                 'desactive' => "Cet admin a été désactivé, vous ne pouvez pas modifier ses données. Veuillez le réactiver avant de les modifier."
-            ]
+            ],
+
+            "desactive" => [
+                "already_desactived" => "Cet admin est déjà désactivé",
+                "success" => "Admin désactivé avec succès",
+                "warning" => "Une erreur est survenue lors de la désactivation de l'admin ".$error_persiste,
+            ],
+
+            "active" => [
+                "already_actived" => "Cet admin est déjà activé",
+                "success" => "Admin activé avec succès",
+                "warning" => "Une erreur est survenue lors de la l'activation de l'admin ".$error_persiste,
+            ],
         ],
 
         'ecoles' => [

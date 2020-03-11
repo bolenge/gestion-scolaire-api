@@ -10,5 +10,7 @@
     $router->post('/login', 'AdminsController@login');
     $router->post('/createAdmin', 'AdminsController@createAdmin');
     $router->put('/updateAdmin/:id', 'AdminsController@updateAdmin');
+    $router->put('/activeAdmin/:id', 'AdminsController@activeAdmin');
+    $router->delete('/desactiveAdmin/:id', 'AdminsController@desactiveAdmin');
 
     return $router;
