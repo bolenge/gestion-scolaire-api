@@ -238,9 +238,10 @@
                         ]);
 
                         if ($result) {
+                            $ecole->flag = "1";
                             $this->objetRetour['success'] = true;
                             $this->objetRetour['message'] = $this->locales['active']['success'];
-                            $this->objetRetour['results'] = $result;
+                            $this->objetRetour['results'] = $ecole;
                         }else {
                             session()->set('errors', [
                                 'warning' => $this->locales['active']['warning']
