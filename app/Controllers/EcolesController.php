@@ -258,4 +258,45 @@
             $this->trackErrors();
             $response->json($this->objetRetour);
         }
+
+        /**
+         * Renvoi les informations d'une école
+         * 
+         * @OA\Get(
+         *      path="/ecoles/getEcoleById/{id}",
+         *      tags={"Ecoles"},
+         *      @OA\Parameter(ref="#/components/parameters/id"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function getEcoleById(Request $request, Response $response)
+        {
+            if ($request->params()->has('id') && \is_int_valid($request->params()->get('id'))) {
+                $ecole = $this->model->findById($request->params()->get('id'));
+
+                if (!empty($ecole)) {
+                    $this->objetRetour['success'] = true;
+                    $this->objetRetour['message'] = $this->locales['find']['success'];
+                    $this->objetRetour['results'] = $ecole;
+                }else {
+                    \session('errors', [
+                        'warning' => $this->locales['find']['nothing']
+                    ]);
+                }
+            }else {
+                \session('errors', [
+                    'warning' => $this->locales['find']['invalid_id']
+                ]);
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
     }

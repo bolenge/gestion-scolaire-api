@@ -7,7 +7,7 @@
     use Ekolo\Framework\Bootstrap\Controller;
     use Ekolo\Framework\Http\Request;
     use Ekolo\Framework\Http\Response;
-    
+
     use App\Utils\AdminsUtil;
     use App\Repositories\AdminsRepository;
 
@@ -179,7 +179,7 @@
         }
 
         /**
-         * Permet de créer un nouvel admin
+         * Permet de modifier les données d'un admin
          * 
          * @OA\Put(
          *      path="/admins/updateAdmin/{id}",

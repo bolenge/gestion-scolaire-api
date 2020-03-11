@@ -98,7 +98,7 @@
                 "tags": [
                     "Admins"
                 ],
-                "summary": "Permet de créer un nouvel admin",
+                "summary": "Permet de modifier les données d'un admin",
                 "operationId": "App\\Controllers\\AdminsController::updateAdmin",
                 "parameters": [
                     {
@@ -236,6 +236,28 @@
                 ],
                 "summary": "Permet de d'activer une école",
                 "operationId": "App\\Controllers\\EcolesController::activeEcole",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/ecoles/getEcoleById/{id}": {
+            "get": {
+                "tags": [
+                    "Ecoles"
+                ],
+                "summary": "Renvoi les informations d'une école",
+                "operationId": "App\\Controllers\\EcolesController::getEcoleById",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/id"

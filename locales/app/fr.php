@@ -73,7 +73,13 @@
                 "already_actived" => "Cette école est déjà activée",
                 "success" => "Ecole activée avec succès",
                 "warning" => "Une erreur est survenue lors de la l'activation de l'école ".$error_persiste,
-            ]
+            ],
+
+            "find" => [
+                "success" => "Ecole trouvée avec succès",
+                "nothing" => "Aucune école trouvée pour cet ID",
+                "invalid_id" => "Veuillez renseigner un ID de l'école valide"
+            ],
         ],
 
         'medias' => [
