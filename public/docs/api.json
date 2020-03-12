@@ -162,6 +162,31 @@
                 }
             }
         },
+        "/admins/getListAdmins/{limit}/{offset}": {
+            "get": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Renvoi la liste des admins",
+                "operationId": "App\\Controllers\\AdminsController::getListAdmins",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/offset"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
         "/ecoles/createEcole": {
             "post": {
                 "tags": [
@@ -273,13 +298,13 @@
                 }
             }
         },
-        "/ecoles/getAllEcoles/{limit}/{offset}": {
+        "/ecoles/getListEcoles/{limit}/{offset}": {
             "get": {
                 "tags": [
                     "Ecoles"
                 ],
                 "summary": "Renvoi les écoles par limite",
-                "operationId": "App\\Controllers\\EcolesController::getAllEcoles",
+                "operationId": "App\\Controllers\\EcolesController::getListEcoles",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/limit"

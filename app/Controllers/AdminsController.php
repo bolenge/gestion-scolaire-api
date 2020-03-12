@@ -354,4 +354,43 @@
             $this->trackErrors();
             $response->json($this->objetRetour);
         }
+
+        /**
+         * Renvoi la liste des admins
+         * 
+         * @OA\Get(
+         *      path="/admins/getListAdmins/{limit}/{offset}",
+         *      tags={"Admins"},
+         *      @OA\Parameter(ref="#/components/parameters/limit"),
+         *      @OA\Parameter(ref="#/components/parameters/offset"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function getListAdmins(Request $request, Response $response)
+        {
+            $limit  = \is_int_valid($request->params()->get('limit')) ? $request->params()->get('limit') : 10;
+            $offset = $request->params()->has('offset') ? (int) $request->params()->get('offset') : 0;
+
+            $ecoles = $this->model->findAllAdmins($limit, $offset);
+
+            if (!empty($ecoles)) {
+                $this->objetRetour['success'] = true;
+                $this->objetRetour['message'] = count($ecoles).' '.$this->locales['find']['success'];
+                $this->objetRetour['results'] = $ecoles;
+            }else {
+                \session('errors', [
+                    'warning' => $this->locales['find']['nothing']
+                ]);
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
     }

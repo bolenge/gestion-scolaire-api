@@ -304,7 +304,7 @@
          * Renvoi les écoles par limite
          * 
          * @OA\Get(
-         *      path="/ecoles/getAllEcoles/{limit}/{offset}",
+         *      path="/ecoles/getListEcoles/{limit}/{offset}",
          *      tags={"Ecoles"},
          *      @OA\Parameter(ref="#/components/parameters/limit"),
          *      @OA\Parameter(ref="#/components/parameters/offset"),
@@ -318,7 +318,7 @@
          *      )
          * )
          */
-        public function getAllEcoles(Request $request, Response $response)
+        public function getListEcoles(Request $request, Response $response)
         {
             $limit  = \is_int_valid($request->params()->get('limit')) ? $request->params()->get('limit') : 10;
             $offset = $request->params()->has('offset') ? (int) $request->params()->get('offset') : 0;

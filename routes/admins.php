@@ -12,5 +12,7 @@
     $router->put('/updateAdmin/:id', 'AdminsController@updateAdmin');
     $router->put('/activeAdmin/:id', 'AdminsController@activeAdmin');
     $router->delete('/desactiveAdmin/:id', 'AdminsController@desactiveAdmin');
+    $router->get('/getListAdmins/:limit/:offset', 'AdminsController@getListAdmins');
+    $router->get('/getListAdmins', 'AdminsController@getListAdmins');
 
     return $router;

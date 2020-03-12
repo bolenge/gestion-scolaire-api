@@ -1,0 +1,639 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "15a36e99cdf4c058647cbe49df724e32",
+    "packages": [
+        {
+            "name": "doctrine/annotations",
+            "version": "v1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/annotations.git",
+                "reference": "904dca4eb10715b92569fbcd79e201d5c349b6bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/904dca4eb10715b92569fbcd79e201d5c349b6bc",
+                "reference": "904dca4eb10715b92569fbcd79e201d5c349b6bc",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/lexer": "1.*",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "doctrine/cache": "1.*",
+                "phpunit/phpunit": "^7.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Common\\Annotations\\": "lib/Doctrine/Common/Annotations"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Johannes Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "Docblock Annotations Parser",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "annotations",
+                "docblock",
+                "parser"
+            ],
+            "time": "2019-10-01T18:55:10+00:00"
+        },
+        {
+            "name": "doctrine/lexer",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/lexer.git",
+                "reference": "5242d66dbeb21a30dd8a3e66bf7a73b66e05e1f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/lexer/zipball/5242d66dbeb21a30dd8a3e66bf7a73b66e05e1f6",
+                "reference": "5242d66dbeb21a30dd8a3e66bf7a73b66e05e1f6",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^6.0",
+                "phpstan/phpstan": "^0.11.8",
+                "phpunit/phpunit": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Common\\Lexer\\": "lib/Doctrine/Common/Lexer"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Johannes Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "PHP Doctrine Lexer parser library that can be used in Top-Down, Recursive Descent Parsers.",
+            "homepage": "https://www.doctrine-project.org/projects/lexer.html",
+            "keywords": [
+                "annotations",
+                "docblock",
+                "lexer",
+                "parser",
+                "php"
+            ],
+            "time": "2019-10-30T14:39:59+00:00"
+        },
+        {
+            "name": "ekolo/eko-helpers",
+            "version": "0.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ekolo-contributing/eko-helpers.git",
+                "reference": "1fec0ba9a07af23414b8345d3a467fd2f37b54ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ekolo-contributing/eko-helpers/zipball/1fec0ba9a07af23414b8345d3a467fd2f37b54ac",
+                "reference": "1fec0ba9a07af23414b8345d3a467fd2f37b54ac",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Don de Dieu BOLENGE",
+                    "email": "dondedieubolenge@gmail.com"
+                }
+            ],
+            "description": "Contient des fonctions",
+            "keywords": [
+                "eko",
+                "eko-helpers",
+                "ekolo",
+                "helpers"
+            ],
+            "time": "2020-03-12T08:28:07+00:00"
+        },
+        {
+            "name": "ekolo/eko-http",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ekolo-contributing/eko-http.git",
+                "reference": "3b6e1279ea98e77ff5bb3fc90498c0fa5efe9cba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ekolo-contributing/eko-http/zipball/3b6e1279ea98e77ff5bb3fc90498c0fa5efe9cba",
+                "reference": "3b6e1279ea98e77ff5bb3fc90498c0fa5efe9cba",
+                "shasum": ""
+            },
+            "require": {
+                "ekolo/eko-magic": "^0.3.1",
+                "ekolo/eko-session": "^0.1.2",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Helpers/functions.php"
+                ],
+                "psr-4": {
+                    "Ekolo\\Component\\Http\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Don de Dieu BOLENGE",
+                    "email": "dondedieubolenge@gmail.com"
+                }
+            ],
+            "description": "Permet de gérer les différentes requêtes et réponses http et d'autres fonctionnalité liées au protol http",
+            "keywords": [
+                "body",
+                "eko",
+                "ekolo",
+                "get",
+                "http",
+                "post",
+                "request",
+                "response"
+            ],
+            "time": "2020-03-12T08:20:33+00:00"
+        },
+        {
+            "name": "ekolo/eko-magic",
+            "version": "0.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ekolo-contributing/eko-magic.git",
+                "reference": "1adb7d6648c996ecd29f95be446f88445fe8612c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ekolo-contributing/eko-magic/zipball/1adb7d6648c996ecd29f95be446f88445fe8612c",
+                "reference": "1adb7d6648c996ecd29f95be446f88445fe8612c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "type": "lbrary",
+            "autoload": {
+                "psr-4": {
+                    "Ekolo\\Component\\EkoMagic\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Don de Dieu BOLENGE",
+                    "email": "dondedieubolenge@gmail.com"
+                }
+            ],
+            "description": "Module permet de g\u0000n\u0000rer des m\u0000thodes magiques",
+            "keywords": [
+                "bag",
+                "eko",
+                "eko-magic",
+                "ekolo",
+                "magic",
+                "magique",
+                "parameter",
+                "parameterbag"
+            ],
+            "time": "2020-03-09T08:25:10+00:00"
+        },
+        {
+            "name": "ekolo/eko-routing",
+            "version": "0.3.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ekolo-contributing/eko-routing.git",
+                "reference": "e0218498022aceaae76d16074a6bdd08f7a3d3f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ekolo-contributing/eko-routing/zipball/e0218498022aceaae76d16074a6bdd08f7a3d3f1",
+                "reference": "e0218498022aceaae76d16074a6bdd08f7a3d3f1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ekolo\\Component\\Routing\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Don de Dieu BOLENGE",
+                    "email": "dondedieubolenge@gmail.com"
+                }
+            ],
+            "description": "Permet de faire la routing des diff\u0000rentes routes \u0000 g\u0000rer",
+            "time": "2020-03-05T11:29:33+00:00"
+        },
+        {
+            "name": "ekolo/eko-session",
+            "version": "0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ekolo-contributing/eko-session.git",
+                "reference": "aff430ba609342a916e3fb85a0871e2c3c2c17af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ekolo-contributing/eko-session/zipball/aff430ba609342a916e3fb85a0871e2c3c2c17af",
+                "reference": "aff430ba609342a916e3fb85a0871e2c3c2c17af",
+                "shasum": ""
+            },
+            "require": {
+                "ekolo/eko-helpers": "^0.3.4",
+                "ekolo/eko-magic": "^0.3.1",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ekolo\\Component\\EkoSession\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Don de Dieu BOLENGE",
+                    "email": "dondedieubolenge@gmail.com"
+                }
+            ],
+            "description": "Module PHP permettant de g\u0000rer les sessions",
+            "time": "2020-03-12T08:09:21+00:00"
+        },
+        {
+            "name": "ekolo/ekolo-framework",
+            "version": "0.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ekolo-contributing/ekolo-framework.git",
+                "reference": "464fb5c18debf846f577f2bb844161e90855a224"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ekolo-contributing/ekolo-framework/zipball/464fb5c18debf846f577f2bb844161e90855a224",
+                "reference": "464fb5c18debf846f577f2bb844161e90855a224",
+                "shasum": ""
+            },
+            "require": {
+                "ekolo/eko-helpers": "^0.3.5",
+                "ekolo/eko-http": "^0.4.0",
+                "ekolo/eko-routing": "^0.3.6",
+                "ekolo/eko-session": "^0.1.2"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Framework/Functions/helpers.php"
+                ],
+                "psr-4": {
+                    "Ekolo\\Framework\\": "src/Framework/",
+                    "Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Don de Dieu BOLENGE",
+                    "email": "dondedieubolenge@gmail.com",
+                    "role": "Développeur"
+                },
+                {
+                    "name": "Josué Mbuyu",
+                    "email": "josuembuyu94@gmail.com",
+                    "role": "Développeur"
+                }
+            ],
+            "description": "Framework PHP",
+            "time": "2020-03-12T09:42:12+00:00"
+        },
+        {
+            "name": "symfony/finder",
+            "version": "v5.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/finder.git",
+                "reference": "6251f201187ca9d66f6b099d3de65d279e971138"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/6251f201187ca9d66f6b099d3de65d279e971138",
+                "reference": "6251f201187ca9d66f6b099d3de65d279e971138",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Finder\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Finder Component",
+            "homepage": "https://symfony.com",
+            "time": "2020-02-14T07:43:07+00:00"
+        },
+        {
+            "name": "symfony/polyfill-ctype",
+            "version": "v1.14.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-ctype.git",
+                "reference": "fbdeaec0df06cf3d51c93de80c7eb76e271f5a38"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/fbdeaec0df06cf3d51c93de80c7eb76e271f5a38",
+                "reference": "fbdeaec0df06cf3d51c93de80c7eb76e271f5a38",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-ctype": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.14-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gert de Pagter",
+                    "email": "BackEndTea@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for ctype functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "ctype",
+                "polyfill",
+                "portable"
+            ],
+            "time": "2020-01-13T11:15:53+00:00"
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "v5.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "a4b613d7e44f62941adff5a802cff70adee57d3f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/a4b613d7e44f62941adff5a802cff70adee57d3f",
+                "reference": "a4b613d7e44f62941adff5a802cff70adee57d3f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5",
+                "symfony/polyfill-ctype": "~1.8"
+            },
+            "conflict": {
+                "symfony/console": "<4.4"
+            },
+            "require-dev": {
+                "symfony/console": "^4.4|^5.0"
+            },
+            "suggest": {
+                "symfony/console": "For validating YAML files using the lint command"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "https://symfony.com",
+            "time": "2020-02-03T13:51:17+00:00"
+        },
+        {
+            "name": "zircote/swagger-php",
+            "version": "3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zircote/swagger-php.git",
+                "reference": "c86386bd623ffad6f7e6f9269bf51d42d2797012"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zircote/swagger-php/zipball/c86386bd623ffad6f7e6f9269bf51d42d2797012",
+                "reference": "c86386bd623ffad6f7e6f9269bf51d42d2797012",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/annotations": "*",
+                "php": ">=7.2",
+                "symfony/finder": ">=2.2",
+                "symfony/yaml": ">=3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=8",
+                "squizlabs/php_codesniffer": ">=3.3",
+                "zendframework/zend-form": "<2.8"
+            },
+            "bin": [
+                "bin/openapi"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "OpenApi\\": "src"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Allen",
+                    "email": "zircote@gmail.com",
+                    "homepage": "http://www.zircote.com"
+                },
+                {
+                    "name": "Bob Fanger",
+                    "email": "bfanger@gmail.com",
+                    "homepage": "http://bfanger.nl"
+                }
+            ],
+            "description": "swagger-php - Generate interactive documentation for your RESTful API using phpdoc annotations",
+            "homepage": "https://github.com/zircote/swagger-php/",
+            "keywords": [
+                "api",
+                "json",
+                "rest",
+                "service discovery"
+            ],
+            "time": "2019-11-30T13:35:44+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

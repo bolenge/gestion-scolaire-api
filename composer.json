@@ -7,6 +7,6 @@
     },
     "require": {
         "zircote/swagger-php": "^3.0",
-        "ekolo/ekolo-framework": "^0.3.3"
+        "ekolo/ekolo-framework": "^0.3.4"
     }
 }

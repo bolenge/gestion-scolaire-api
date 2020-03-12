@@ -25,7 +25,7 @@
             ],
 
             "find" => [
-                "success" => "Admin trouvé avec succès",
+                "success" => "Admin(s) trouvé(s) avec succès",
                 "nothing" => "Aucun admin trouvé pour cet ID",
                 "invalid_id" => "Veuillez renseigner un ID de l'admin valide"
             ],
