@@ -272,10 +272,62 @@
                     }
                 }
             }
+        },
+        "/ecoles/getAllEcoles/{limit}/{offset}": {
+            "get": {
+                "tags": [
+                    "Ecoles"
+                ],
+                "summary": "Renvoi les écoles par limite",
+                "operationId": "App\\Controllers\\EcolesController::getAllEcoles",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/offset"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
         }
     },
     "components": {
         "schemas": {
+            "ecole": {
+                "description": "Objet réprésentant une école",
+                "properties": {
+                    "nom": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "email"
+                    },
+                    "website": {
+                        "type": "url"
+                    },
+                    "telephone": {
+                        "type": "tel"
+                    },
+                    "localite": {
+                        "type": "string"
+                    },
+                    "num_agrement": {
+                        "type": "string"
+                    },
+                    "id_media_logo": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
             "objetRetour": {
                 "description": "Objet retour de résultats uax requêtes",
                 "properties": {
@@ -329,6 +381,22 @@
                 "in": "path",
                 "description": "ID de la ressource",
                 "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "limit": {
+                "name": "limit",
+                "in": "path",
+                "description": "Limite des données à renvoyer",
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "offset": {
+                "name": "offset",
+                "in": "path",
+                "description": "Le offset des données à renvoyer",
                 "schema": {
                     "type": "integer"
                 }
@@ -443,30 +511,8 @@
                                 "localite",
                                 "num_agrement"
                             ],
-                            "properties": {
-                                "nom": {
-                                    "type": "string"
-                                },
-                                "email": {
-                                    "type": "email"
-                                },
-                                "website": {
-                                    "type": "url"
-                                },
-                                "telephone": {
-                                    "type": "tel"
-                                },
-                                "localite": {
-                                    "type": "string"
-                                },
-                                "num_agrement": {
-                                    "type": "string"
-                                },
-                                "id_media_logo": {
-                                    "type": "integer"
-                                }
-                            },
-                            "type": "object"
+                            "type": "object",
+                            "$ref": "#/components/schemas/ecole"
                         }
                     }
                 }

@@ -76,7 +76,7 @@
             ],
 
             "find" => [
-                "success" => "Ecole trouvée avec succès",
+                "success" => "Ecole(s) trouvée(s) avec succès",
                 "nothing" => "Aucune école trouvée pour cet ID",
                 "invalid_id" => "Veuillez renseigner un ID de l'école valide"
             ],

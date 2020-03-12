@@ -279,7 +279,7 @@
         public function getEcoleById(Request $request, Response $response)
         {
             if ($request->params()->has('id') && \is_int_valid($request->params()->get('id'))) {
-                $ecole = $this->model->findById($request->params()->get('id'));
+                $ecole = current($this->model->findById($request->params()->get('id')));
 
                 if (!empty($ecole)) {
                     $this->objetRetour['success'] = true;
@@ -293,6 +293,45 @@
             }else {
                 \session('errors', [
                     'warning' => $this->locales['find']['invalid_id']
+                ]);
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
+
+        /**
+         * Renvoi les écoles par limite
+         * 
+         * @OA\Get(
+         *      path="/ecoles/getAllEcoles/{limit}/{offset}",
+         *      tags={"Ecoles"},
+         *      @OA\Parameter(ref="#/components/parameters/limit"),
+         *      @OA\Parameter(ref="#/components/parameters/offset"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function getAllEcoles(Request $request, Response $response)
+        {
+            $limit  = \is_int_valid($request->params()->get('limit')) ? $request->params()->get('limit') : 10;
+            $offset = $request->params()->has('offset') ? (int) $request->params()->get('offset') : 0;
+
+            $ecoles = $this->model->findAllEcoles($limit, $offset);
+
+            if (!empty($ecoles)) {
+                $this->objetRetour['success'] = true;
+                $this->objetRetour['message'] = count($ecoles).' '.$this->locales['find']['success'];
+                $this->objetRetour['results'] = $ecoles;
+            }else {
+                \session('errors', [
+                    'warning' => $this->locales['find']['nothing']
                 ]);
             }
 

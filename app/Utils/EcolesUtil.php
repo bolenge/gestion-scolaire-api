@@ -11,6 +11,18 @@
         use Util;
         
         /**
+         * @OA\Schema(
+         *      schema="ecole",
+         *      description="Objet réprésentant une école",
+         *      @OA\Property(type="string", property="nom"),
+         *      @OA\Property(type="email", property="email"),
+         *      @OA\Property(type="url", property="website"),
+         *      @OA\Property(type="tel", property="telephone"),
+         *      @OA\Property(type="string", property="localite"),
+         *      @OA\Property(type="string", property="num_agrement"),
+         *      @OA\Property(type="integer", property="id_media_logo")
+         * )
+         * 
          * @OA\RequestBody(
          * 		request="ecoleRequestBody",
          * 		description="Les données à renseigner pour la création d'une école",
@@ -20,13 +32,7 @@
          *          @OA\Schema(
          *          	type="object",
          *				required={"nom", "telephone", "localite", "num_agrement"},
-         *              @OA\Property(type="string", property="nom"),
-         *              @OA\Property(type="email", property="email"),
-         *              @OA\Property(type="url", property="website"),
-         *              @OA\Property(type="tel", property="telephone"),
-         *              @OA\Property(type="string", property="localite"),
-         *              @OA\Property(type="string", property="num_agrement"),
-         *              @OA\Property(type="integer", property="id_media_logo")
+         *              ref="#/components/schemas/ecole"
          *         )
          *     )
          * )

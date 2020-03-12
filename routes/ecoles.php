@@ -11,5 +11,7 @@
     $router->put('/activeEcole/:id', 'EcolesController@activeEcole');
     $router->delete('/desactiveEcole/:id', 'EcolesController@desactiveEcole');
     $router->get('/getEcoleById/:id', 'EcolesController@getEcoleById');
+    $router->get('/getAllEcoles/:limit/:offset', 'EcolesController@getAllEcoles');
+    $router->get('/getAllEcoles', 'EcolesController@getAllEcoles');
 
     return $router;

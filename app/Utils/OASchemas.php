@@ -14,6 +14,19 @@
          *      @OA\Schema(type="integer")
          * )
          * 
+         * @OA\Parameter(
+         *      name="limit",
+         *      in="path",
+         *      description="Limite des données à renvoyer",
+         *      @OA\Schema(type="integer")
+         * )
+         * 
+         * @OA\Parameter(
+         *      name="offset",
+         *      in="path",
+         *      description="Le offset des données à renvoyer",
+         *      @OA\Schema(type="integer")
+         * )
          * 
          * @OA\Response(
          *      response="NotFoundResponse",
@@ -30,6 +43,4 @@
          * )
          */
         protected $id;
-        
-
     }
