@@ -54,6 +54,11 @@
                 if (!empty($admin)) {
                     if (bcrypt_verify_password($request->body()->password(), $admin->password)) {
                         if ($admin->flag == "1") {
+                            $this->model->add([
+                                'id_admin' => (int) $admin->id,
+                                'libelle' => 'login'
+                            ], 'sessions_admins');
+
                             $this->objetRetour['success'] = true;
                             $this->objetRetour['message'] = $this->locales['login']['success'];
                             $this->objetRetour['results'] = $admin;
@@ -387,6 +392,58 @@
             }else {
                 \session('errors', [
                     'warning' => $this->locales['find']['nothing']
+                ]);
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
+
+        /**
+         * Signale la déconnexion de l'admin
+         * 
+         * @OA\Post(
+         *      path="/admins/logout/{id}",
+         *      tags={"Admins"},
+         *      @OA\Parameter(ref="#/components/parameters/id"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function logout(Request $request, Response $response)
+        {
+            if ($request->params()->has('id') && \is_int_valid($request->params()->get('id'))) {
+                $admin = $this->model->findOneById($request->params()->get('id'));
+
+                if (!empty($admin)) {
+                    if ($admin->flag == "1") {
+                        $this->model->add([
+                            'id_admin' => (int) $admin->id,
+                            'libelle' => 'logout'
+                        ], 'sessions_admins');
+
+                        $this->objetRetour['success'] = true;
+                        $this->objetRetour['message'] = $this->locales['logout']['success'];
+                        $this->objetRetour['results'] = true;
+                    }else {
+                        \session('errors', [
+                            'warning' => $this->locales['logout']['account_blocked']
+                        ]);
+                    }
+                }else {
+                    \session('errors', [
+                        'warning' => $this->locales['find']['nothing']
+                    ]);
+                }
+            }else {
+                \session('errors', [
+                    'warning' => $this->locales['find']['invalid_id']
                 ]);
             }
 

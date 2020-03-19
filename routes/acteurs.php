@@ -9,5 +9,6 @@
     $router->post('/createActeur', 'ActeursController@createActeur');
     $router->post('/login', 'ActeursController@login');
     $router->get('/getActeurInfos/:id', 'ActeursController@getActeurInfos');
+    $router->put('/updateActeur/:id', 'ActeursController@updateActeur');
 
     return $router;

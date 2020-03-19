@@ -4,6 +4,7 @@
 
     use OpenApi\Annotations as OA;
     use Ekolo\Framework\Bootstrap\Model;
+    use App\Utils\UploadFile;
 
     /**
      * Util principal
@@ -58,6 +59,17 @@
                 
                 session()->remove('errors');
             }
+        }
+
+        /**
+         * Permet d'uploader un fichier
+         * @param array $file
+         * @return array
+         */
+        public function uploadFile(array $file)
+        {
+            $uploadFile = new UploadFile($file);
+            return $uploadFile->upload();
         }
     }
     

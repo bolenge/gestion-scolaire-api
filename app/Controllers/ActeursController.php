@@ -72,4 +72,58 @@
             $response->json($this->objetRetour);
         }
 
+        /**
+         * Permet de créer un nouvel acteur
+         * 
+         * @OA\Put(
+         *      path="/acteurs/updateActeur/{id}",
+         *      tags={"Acteurs"},
+         *      @OA\Parameter(ref="#/components/parameters/id"),
+         *      @OA\RequestBody(ref="#/components/requestBodies/createActeurRequest"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function updateActeur(Request $request, Response $response)
+        {
+            $request->body()->set('id', $request->params()->get('id'));
+
+            if ($request->validator($this->rulesCreating)) {
+                if (!in_array($request->body()->sexe(), $this->sexes)) {
+                    \session()->set('errors',
+                    !session()->has('errors') ? [] : [
+                        'sexe' => $this->locales['create']['sexe_invalid']
+                    ]);
+                }
+
+                if (!session()->has('errors')) {
+                    if (!empty($acteur = $this->model->findOneById($request->body()->id()))) {
+                        if (!empty($acteurSave = $this->save($request, $response))) {
+                            $acteur = $this->model->findOneById($request->body()->id());
+                            $this->objetRetour['success'] = true;
+                            $this->objetRetour['message'] = $this->locales['update']['success'];
+                            $this->objetRetour['results'] = $acteur;
+                        }else {
+                            session()->set('errors', [
+                                'warning' => $this->locales['update']['warning']
+                            ]);
+                        }
+                    }else {
+                        session()->set('errors', [
+                            'warning' => $this->locales['find']['nothing']
+                        ]);
+                    }
+                }
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
+
     }

@@ -4,6 +4,8 @@
 
     use OpenApi\Annotations as OA;
     use Ekolo\Framework\Bootstrap\Model;
+    use Ekolo\Framework\Http\Request;
+    use Ekolo\Framework\Http\Response;
 
     /**
      * Repository principal

@@ -44,6 +44,10 @@
                 $data['id'] = $request->body()->id();
             }
 
+            if (!empty($request->body()->id_media_avatar())) {
+                $data['id_media_avatar'] = $request->body()->id_media_avatar();
+            }
+
             return $this->model->save($data, $this->table);
         }
     }

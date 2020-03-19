@@ -31,6 +31,31 @@
                 }
             }
         },
+        "/acteurs/updateActeur/{id}": {
+            "put": {
+                "tags": [
+                    "Acteurs"
+                ],
+                "summary": "Permet de créer un nouvel acteur",
+                "operationId": "App\\Controllers\\ActeursController::updateActeur",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/createActeurRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
         "/admins/login": {
             "post": {
                 "tags": [
@@ -187,6 +212,28 @@
                 }
             }
         },
+        "/admins/logout/{id}": {
+            "post": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Signale la déconnexion de l'admin",
+                "operationId": "App\\Controllers\\AdminsController::logout",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
         "/ecoles/createEcole": {
             "post": {
                 "tags": [
@@ -313,6 +360,26 @@
                         "$ref": "#/components/parameters/offset"
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/medias/upload": {
+            "post": {
+                "tags": [
+                    "Medias"
+                ],
+                "summary": "Permet de faire l'upload d'un média",
+                "operationId": "App\\Controllers\\MediasController::upload",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/createMediaRequest"
+                },
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/SuccessResponse"
@@ -517,6 +584,9 @@
                                 },
                                 "id_acteur": {
                                     "type": "integer"
+                                },
+                                "id_media_avatar": {
+                                    "type": "integer"
                                 }
                             },
                             "type": "object"
@@ -538,6 +608,30 @@
                             ],
                             "type": "object",
                             "$ref": "#/components/schemas/ecole"
+                        }
+                    }
+                }
+            },
+            "createMediaRequest": {
+                "description": "Les données à renseigner",
+                "required": true,
+                "content": {
+                    "multipart/form-data": {
+                        "schema": {
+                            "required": [
+                                "media"
+                            ],
+                            "properties": {
+                                "media": {
+                                    "description": "Le fichier à uploader",
+                                    "type": "file",
+                                    "items": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            },
+                            "type": "object"
                         }
                     }
                 }

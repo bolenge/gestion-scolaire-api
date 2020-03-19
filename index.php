@@ -9,6 +9,7 @@
     $apps    = require './routes/apps.php';
     $ecoles  = require './routes/ecoles.php';
     $acteurs = require './routes/acteurs.php';
+    $medias  = require './routes/medias.php';
 
     // Middlewares
     $app->middleware('errors', function (Middleware $middleware) {
@@ -20,3 +21,4 @@
     $app->use('/admins', $admins);
     $app->use('/ecoles', $ecoles);
     $app->use('/acteurs', $acteurs);
+    $app->use('/medias', $medias);

@@ -15,6 +15,14 @@
                 'account_blocked' => "Votre compte a été bloqué (supendu) <br/><br/> Veuillez contacter le supper admin ou l'équipe de développement UHTEC"
             ],
 
+            'logout' => [
+                'username_invalid' => 'Ce compte n\'existe pas',
+                'password_invalid' => "Mot de passe incorrect",
+                'success' => "Admin déconnecté avec succès",
+                'username_or_password_invalid' => "Nom d'utilisateur ou Mot de passe incorrect",
+                'account_blocked' => "Votre compte a été bloqué (supendu) <br/><br/> Veuillez contacter le supper admin ou l'équipe de développement UHTEC"
+            ],
+
             "create" => [
                 "email_used" => "Adresse email déjà utilisé pour un autre compte admin",
                 "role_invalid" => "Rôle de l'admin est invalide",
@@ -83,14 +91,27 @@
         ],
 
         'medias' => [
-            'id_invalid' => "L'ID du média envoyé est invalide"
+            'id_invalid' => "L'ID du média envoyé est invalide",
+            'create' => [
+                'success' => "Fichier enregistré avec succès",
+                "warning" => "Une erreur est survenue lors de la'enregistrement du fichier ".$error_persiste,
+            ]
         ],
 
         'acteurs' => [
             'create' => [
                 "sexe_invalid" => "Sexe invalide, doit être M ou F ou Autre",
                 "success" => "Acteur créé avec succès",
-                "warning" => "Une erreur est survenue lors de la l'activation de l'acteur ".$error_persiste,
+                "warning" => "Une erreur est survenue lors de la création de l'acteur ".$error_persiste,
+            ],
+
+            'update' => [
+                "success" => "Acteur modifié avec succès",
+                "warning" => "Une erreur est survenue lors de la modification de l'acteur ".$error_persiste,
+            ],
+
+            'find' => [
+                "nothing" => "Aucun acteur trouvé pour cet ID"
             ]
         ],
 

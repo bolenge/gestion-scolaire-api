@@ -14,5 +14,6 @@
     $router->delete('/desactiveAdmin/:id', 'AdminsController@desactiveAdmin');
     $router->get('/getListAdmins/:limit/:offset', 'AdminsController@getListAdmins');
     $router->get('/getListAdmins', 'AdminsController@getListAdmins');
+    $router->post('/logout/:id', 'AdminsController@logout');
 
     return $router;

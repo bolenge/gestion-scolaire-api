@@ -46,7 +46,8 @@
          *              @OA\Property(type="string", property="role"),
          *              @OA\Property(type="string", property="username"),
          *              @OA\Property(type="string", property="password"),
-         *              @OA\Property(type="integer", property="id_acteur")
+         *              @OA\Property(type="integer", property="id_acteur"),
+         *              @OA\Property(type="integer", property="id_media_avatar"),
          *         )
          *     )
          * )
@@ -58,7 +59,8 @@
             'role' => 'required|min:3|max:100|alpha',
             'username' => 'required|min:3|max:100|alpha',
             'password' => 'required|min:6|alpha',
-            'id_acteur' => 'required|int'
+            'id_acteur' => 'required|int',
+            'id_media_avatar' => 'int'
         ];
 
         /**
