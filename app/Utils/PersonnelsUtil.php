@@ -22,8 +22,8 @@
          *				required={"fonction", "matricule", "id_acteur"},
          *              @OA\Property(type="string", property="fonction"),
          *              @OA\Property(type="string", property="matricule"),
-         *              @OA\Property(type="integer", property="id_acteur"),
          *              @OA\Property(type="integer", property="id_ecole"),
+         *              @OA\Property(type="integer", property="id_acteur")
          *         )
          *     )
          * )
@@ -32,28 +32,19 @@
          */
         protected $rulesCreating = [
             'id' => 'int',
-            'role' => 'required|min:3|max:100|alpha',
-            'username' => 'required|min:3|max:100|alpha',
+            'fonction' => 'required|min:3|max:200|alpha',
+            'matricule' => 'required|min:3|max:200',
             'password' => 'required|min:6|alpha',
             'id_acteur' => 'required|int',
-            'id_media_avatar' => 'int'
-        ];
-
-        /**
-         * Les r$oles réconnus
-         * @var array
-         */
-        protected $roles = [
-            'super-admin',
-            'simple-admin'
+            'id_ecole' => 'required|int'
         ];
 
         /**
          * Réprésente le __construct de ce trait
          */
-        public function traitAdminsUtilContruct()
+        public function traitPersonnelsUtilConstruct()
         {
-            $this->locales = \locales('app')['admins'];
+            $this->locales = \locales('app')['personnels'];
         }
     }
     

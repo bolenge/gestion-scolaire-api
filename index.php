@@ -10,6 +10,7 @@
     $ecoles  = require './routes/ecoles.php';
     $acteurs = require './routes/acteurs.php';
     $medias  = require './routes/medias.php';
+    $personnels  = require './routes/personnels.php';
 
     // Middlewares
     $app->middleware('errors', function (Middleware $middleware) {
@@ -22,3 +23,4 @@
     $app->use('/ecoles', $ecoles);
     $app->use('/acteurs', $acteurs);
     $app->use('/medias', $medias);
+    $app->use('/personnels', $personnels);

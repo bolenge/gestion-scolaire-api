@@ -117,5 +117,15 @@
 
         'errors' => [
             '404' => "La route demandée n'existe pas (ou plus)"
-        ]
+        ],
+
+        'personnels' => [
+            "create" => [
+                'success' => "Personnel créé avec succès",
+                'warning' => "Une erreur est survenue lors de la création du personnel ".$error_persiste,
+                "id_acteur_invalid" => "ID acteur invalide",
+                "id_ecole_invalid" => "ID école invalide",
+                "matricule_used" => "Ce matricule est déjà utilisé par un autre personnel de cette école",
+            ],
+        ],
     ];

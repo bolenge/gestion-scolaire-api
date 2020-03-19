@@ -389,6 +389,26 @@
                     }
                 }
             }
+        },
+        "/personnels/createPersonnel": {
+            "post": {
+                "tags": [
+                    "Personnels"
+                ],
+                "summary": "Permet de créer un nouveau personnel d'une école",
+                "operationId": "App\\Controllers\\PersonnelsController::createPersonnel",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/createPersonnelRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -654,10 +674,10 @@
                                 "matricule": {
                                     "type": "string"
                                 },
-                                "id_acteur": {
+                                "id_ecole": {
                                     "type": "integer"
                                 },
-                                "id_ecole": {
+                                "id_acteur": {
                                     "type": "integer"
                                 }
                             },
