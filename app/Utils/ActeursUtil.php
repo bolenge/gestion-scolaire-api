@@ -27,7 +27,8 @@
          *              @OA\Property(type="string", property="postnom"),
          *              @OA\Property(type="string", property="telephone"),
          *              @OA\Property(type="string", property="etat_civil"),
-         *              @OA\Property(type="integer", property="id_adresse")
+         *              @OA\Property(type="integer", property="id_adresse"),
+         *              @OA\Property(type="integer", property="id_media_avatar")
          *         )
          *     )
          * )
@@ -42,7 +43,8 @@
             'postnom' => 'min:3|max:100|alpha',
             'telephone' => 'tel|min:10|max:16',
             'etat_civil' => 'min:3|max:100|alpha',
-            'id_adresse' => 'int'
+            'id_adresse' => 'int',
+            'id_media_avatar' => 'int'
         ];
 
         /**

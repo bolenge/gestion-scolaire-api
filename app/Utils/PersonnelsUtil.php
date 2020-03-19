@@ -6,47 +6,24 @@
     use App\Utils\Util;
 
     
-    trait AdminsUtil
+    trait PersonnelsUtil
     {
         use Util;
 
         /**
          * @OA\RequestBody(
-         * 		request="adminLogin",
+         * 		request="createPersonnelRequest",
          * 		description="Les données à renseigner",
          *		required=true,
          *      @OA\MediaType(
          *      	mediaType="application/x-www-form-urlencoded",
          *          @OA\Schema(
          *          	type="object",
-         *				required={"username", "password"},
-         *              @OA\Property(type="string", property="username"),
-         *              @OA\Property(type="string", property="password")
-         *         )
-         *     )
-         * )
-         * 
-         * @var array
-         */
-        protected $rulesLogin = [
-            'username' => 'required|min:3|max:100|alpha',
-            'password' => 'required|min:6|alpha'
-        ];
-
-        /**
-         * @OA\RequestBody(
-         * 		request="createAdminRequest",
-         * 		description="Les données à renseigner",
-         *		required=true,
-         *      @OA\MediaType(
-         *      	mediaType="application/x-www-form-urlencoded",
-         *          @OA\Schema(
-         *          	type="object",
-         *				required={"username", "password", "id_acteur", "role"},
-         *              @OA\Property(type="string", property="role"),
-         *              @OA\Property(type="string", property="username"),
-         *              @OA\Property(type="string", property="password"),
+         *				required={"fonction", "matricule", "id_acteur"},
+         *              @OA\Property(type="string", property="fonction"),
+         *              @OA\Property(type="string", property="matricule"),
          *              @OA\Property(type="integer", property="id_acteur"),
+         *              @OA\Property(type="integer", property="id_ecole"),
          *         )
          *     )
          * )
@@ -58,7 +35,8 @@
             'role' => 'required|min:3|max:100|alpha',
             'username' => 'required|min:3|max:100|alpha',
             'password' => 'required|min:6|alpha',
-            'id_acteur' => 'required|int'
+            'id_acteur' => 'required|int',
+            'id_media_avatar' => 'int'
         ];
 
         /**

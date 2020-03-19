@@ -530,6 +530,9 @@
                                 },
                                 "id_adresse": {
                                     "type": "integer"
+                                },
+                                "id_media_avatar": {
+                                    "type": "integer"
                                 }
                             },
                             "type": "object"
@@ -584,9 +587,6 @@
                                 },
                                 "id_acteur": {
                                     "type": "integer"
-                                },
-                                "id_media_avatar": {
-                                    "type": "integer"
                                 }
                             },
                             "type": "object"
@@ -629,6 +629,36 @@
                                         "type": "string",
                                         "format": "binary"
                                     }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "createPersonnelRequest": {
+                "description": "Les données à renseigner",
+                "required": true,
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "required": [
+                                "fonction",
+                                "matricule",
+                                "id_acteur"
+                            ],
+                            "properties": {
+                                "fonction": {
+                                    "type": "string"
+                                },
+                                "matricule": {
+                                    "type": "string"
+                                },
+                                "id_acteur": {
+                                    "type": "integer"
+                                },
+                                "id_ecole": {
+                                    "type": "integer"
                                 }
                             },
                             "type": "object"
