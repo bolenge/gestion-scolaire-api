@@ -456,6 +456,28 @@
                     }
                 }
             }
+        },
+        "/personnels/activePersonnel/{id}": {
+            "put": {
+                "tags": [
+                    "Personnels"
+                ],
+                "summary": "Permet de d'activer un personnel",
+                "operationId": "App\\Controllers\\PersonnelsController::activePersonnel",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
         }
     },
     "components": {

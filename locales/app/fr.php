@@ -139,5 +139,11 @@
                 "success" => "Personnel désactivé avec succès",
                 "warning" => "Une erreur est survenue lors de la désactivation du personnel ".$error_persiste,
             ],
+
+            "active" => [
+                "already_actived" => "Ce personnel est déjà activé",
+                "success" => "Personnel activé avec succès",
+                "warning" => "Une erreur est survenue lors de la l'activation du personnel ".$error_persiste,
+            ],
         ],
     ];

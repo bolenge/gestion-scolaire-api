@@ -8,6 +8,7 @@
 
     $router->post('/createPersonnel', 'PersonnelsController@createPersonnel');
     $router->put('/updatePersonnel/:id', 'PersonnelsController@updatePersonnel');
+    $router->put('/activePersonnel/:id', 'PersonnelsController@activePersonnel');
     $router->delete('/desactivePersonnel/:id', 'PersonnelsController@desactivePersonnel');
 
     return $router;
