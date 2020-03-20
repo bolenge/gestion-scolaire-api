@@ -304,4 +304,45 @@
             $this->trackErrors();
             $response->json($this->objetRetour);
         }
+
+        /**
+         * Renvoi les informations d'un personnel
+         * 
+         * @OA\Get(
+         *      path="/personnels/getPersonnelById/{id}",
+         *      tags={"Personnels"},
+         *      @OA\Parameter(ref="#/components/parameters/id"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function getPersonnelById(Request $request, Response $response)
+        {
+            if ($request->params()->has('id') && \is_int_valid($request->params()->get('id'))) {
+                $personnel = $this->model->findOneById($request->params()->get('id'));
+
+                if (!empty($personnel)) {
+                    $this->objetRetour['success'] = true;
+                    $this->objetRetour['message'] = $this->locales['find']['success'];
+                    $this->objetRetour['results'] = $personnel;
+                }else {
+                    \session('errors', [
+                        'warning' => $this->locales['find']['nothing']
+                    ]);
+                }
+            }else {
+                \session('errors', [
+                    'warning' => $this->locales['find']['invalid_id']
+                ]);
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
     }

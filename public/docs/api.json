@@ -503,6 +503,28 @@
                     }
                 }
             }
+        },
+        "/personnels/getPersonnelById/{id}": {
+            "get": {
+                "tags": [
+                    "Personnels"
+                ],
+                "summary": "Renvoi les informations d'un personnel",
+                "operationId": "App\\Controllers\\PersonnelsController::getPersonnelById",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
         }
     },
     "components": {

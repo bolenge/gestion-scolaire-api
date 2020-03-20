@@ -12,5 +12,6 @@
     $router->delete('/desactivePersonnel/:id', 'PersonnelsController@desactivePersonnel');
     $router->get('/getListPersonnels/:limit/:offset', 'PersonnelsController@getListPersonnels');
     $router->get('/getListPersonnels', 'PersonnelsController@getListPersonnels');
+    $router->get('/getPersonnelById/:id', 'PersonnelsController@getPersonnelById');
 
     return $router;

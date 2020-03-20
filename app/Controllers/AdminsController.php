@@ -103,7 +103,7 @@
         public function getAdminById(Request $request, Response $response)
         {
             if ($request->params()->has('id') && \is_int_valid($request->params()->get('id'))) {
-                $admin = $this->model->findById($request->params()->get('id'));
+                $admin = $this->model->findOneById($request->params()->get('id'));
 
                 if (!empty($admin)) {
                     $this->objetRetour['success'] = true;
