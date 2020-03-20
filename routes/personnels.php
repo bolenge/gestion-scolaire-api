@@ -10,5 +10,7 @@
     $router->put('/updatePersonnel/:id', 'PersonnelsController@updatePersonnel');
     $router->put('/activePersonnel/:id', 'PersonnelsController@activePersonnel');
     $router->delete('/desactivePersonnel/:id', 'PersonnelsController@desactivePersonnel');
+    $router->get('/getListPersonnels/:limit/:offset', 'PersonnelsController@getListPersonnels');
+    $router->get('/getListPersonnels', 'PersonnelsController@getListPersonnels');
 
     return $router;

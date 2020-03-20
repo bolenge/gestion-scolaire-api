@@ -478,6 +478,31 @@
                     }
                 }
             }
+        },
+        "/personnels/getListPersonnels/{limit}/{offset}": {
+            "get": {
+                "tags": [
+                    "Personnels"
+                ],
+                "summary": "Renvoi la liste des personnels",
+                "operationId": "App\\Controllers\\PersonnelsController::getListPersonnels",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/offset"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
         }
     },
     "components": {

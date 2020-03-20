@@ -145,5 +145,11 @@
                 "success" => "Personnel activé avec succès",
                 "warning" => "Une erreur est survenue lors de la l'activation du personnel ".$error_persiste,
             ],
+
+            "find" => [
+                "success" => "Personnel(s) trouvé(s) avec succès",
+                "nothing" => "Aucun personnel trouvé pour cet ID",
+                "invalid_id" => "Veuillez renseigner un ID du personnel valide"
+            ],
         ],
     ];
