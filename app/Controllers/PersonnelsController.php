@@ -71,7 +71,7 @@
                 }
 
                 if (!session()->has('errors')) {
-                    if (!empty($admin = $this->save($request, $response))) {
+                    if (!empty($personnel = $this->save($request, $response))) {
                         $this->objetRetour['success'] = true;
                         $this->objetRetour['message'] = $this->locales['create']['success'];
                         $this->objetRetour['results'] = $admin;
@@ -148,6 +148,61 @@
                             ]);
                         }
                     }
+                }
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
+
+        /**
+         * Permet de désactiver un personnel
+         * 
+         * @OA\Delete(
+         *      path="/personnels/desactivePersonnel/{id}",
+         *      tags={"Personnels"},
+         *      @OA\Parameter(ref="#/components/parameters/id"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function desactivePersonnel(Request $request, Response $response)
+        {   
+            $request->body()->set('id', $request->params()->get('id'));
+            
+            if ($request->validator($this->rulesCreating)) {
+                if (!empty($personnel = $this->model->findOneById($request->body()->get('id')))) {
+                    
+                    if ($personnel->flag == "0") {
+                        session()->set('errors', [
+                            'warning' => $this->locales['desactive']['already_desactived']
+                        ]);
+                    }else {
+                        $result = $this->model->update([
+                            'id' => $request->body()->get('id'),
+                            'flag' => "0"
+                        ]);
+
+                        if ($result) {
+                            $this->objetRetour['success'] = true;
+                            $this->objetRetour['message'] = $this->locales['desactive']['success'];
+                            $this->objetRetour['results'] = $result;
+                        }else {
+                            session()->set('errors', [
+                                'warning' => $this->locales['desactive']['warning']
+                            ]);
+                        }
+                    }
+                }else {
+                    \session()->set('errors', [
+                        'warning' => $this->locales['find']['nothing']
+                    ]);
                 }
             }
 

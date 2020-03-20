@@ -133,5 +133,11 @@
                 'warning' => "Une erreur est survenue lors de la mofication du personnel ".$error_persiste,
                 'desactive' => "Cet personnel a été désactivé, vous ne pouvez pas modifier ses données. Veuillez le réactiver avant de les modifier."
             ],
+
+            "desactive" => [
+                "already_desactived" => "Ce personnel est déjà désactivé",
+                "success" => "Personnel désactivé avec succès",
+                "warning" => "Une erreur est survenue lors de la désactivation du personnel ".$error_persiste,
+            ],
         ],
     ];

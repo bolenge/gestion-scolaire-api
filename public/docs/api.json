@@ -434,6 +434,28 @@
                     }
                 }
             }
+        },
+        "/personnels/desactivePersonnel/{id}": {
+            "delete": {
+                "tags": [
+                    "Personnels"
+                ],
+                "summary": "Permet de désactiver un personnel",
+                "operationId": "App\\Controllers\\PersonnelsController::desactivePersonnel",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
         }
     },
     "components": {
