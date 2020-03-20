@@ -127,5 +127,11 @@
                 "id_ecole_invalid" => "ID école invalide",
                 "matricule_used" => "Ce matricule est déjà utilisé par un autre personnel de cette école",
             ],
+
+            'update' => [
+                'success' => "Modification du personnel faite avec succès",
+                'warning' => "Une erreur est survenue lors de la mofication du personnel ".$error_persiste,
+                'desactive' => "Cet personnel a été désactivé, vous ne pouvez pas modifier ses données. Veuillez le réactiver avant de les modifier."
+            ],
         ],
     ];

@@ -409,6 +409,31 @@
                     }
                 }
             }
+        },
+        "/personnels/updatePersonnel/{id}": {
+            "put": {
+                "tags": [
+                    "Personnels"
+                ],
+                "summary": "Permet de modifier les données d'un admin",
+                "operationId": "App\\Controllers\\PersonnelsController::updatePersonnel",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/createPersonnelRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
         }
     },
     "components": {

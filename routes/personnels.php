@@ -7,5 +7,6 @@
     $router = new Router;
 
     $router->post('/createPersonnel', 'PersonnelsController@createPersonnel');
+    $router->put('/updatePersonnel/:id', 'PersonnelsController@updatePersonnel');
 
     return $router;

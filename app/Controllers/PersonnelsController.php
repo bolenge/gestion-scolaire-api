@@ -42,7 +42,6 @@
          */
         public function createPersonnel(Request $request, Response $response)
         {
-            // debug($request->body()->all());
             if ($request->validator($this->rulesCreating)) {
 
                 if (!$this->model->exists('id', $request->body()->id_acteur(), 'acteurs')) {
@@ -64,7 +63,7 @@
                     ]);
                 }
 
-                if (!$this->model->exists('id', $request->body()->id_ecole(), 'acteurs')) {
+                if (!$this->model->exists('id', $request->body()->id_ecole(), 'ecoles')) {
                     \session()->set('errors',
                     !session()->has('errors') ? [] : [
                         'id_ecole' => $this->locales['create']['id_ecole_invalid']
@@ -89,4 +88,70 @@
             $response->json($this->objetRetour);
         }
 
+        /**
+         * Permet de modifier les données d'un admin
+         * 
+         * @OA\Put(
+         *      path="/personnels/updatePersonnel/{id}",
+         *      tags={"Personnels"},
+         *      @OA\Parameter(ref="#/components/parameters/id"),
+         *      @OA\RequestBody(ref="#/components/requestBodies/createPersonnelRequest"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function updatePersonnel(Request $request, Response $response)
+        {
+            $request->body()->set('id', $request->params()->get('id'));
+
+            if ($request->validator($this->rulesCreating)) {
+
+                $personnel = $this->model->findOneById($request->body('id'), 'personnels');
+
+                if (!empty($personnel)) {
+                    if (!$this->model->exists('id', $request->body()->id_acteur(), 'acteurs')) {
+                        \session()->set('errors',
+                        !session()->has('errors') ? [] : [
+                            'id_acteur' => $this->locales['create']['id_acteur_invalid']
+                        ]);
+                    }
+    
+                    if ($this->model->exists('matricule', $personnel->matricule, 'personnels') && $personnel->id_ecole != $request->body()->id_ecole()) {
+                        \session()->set('errors',
+                        !session()->has('errors') ? [] : [
+                            'matricule' => $this->locales['create']['matricule_used']
+                        ]);
+                    }
+    
+                    if (!$this->model->exists('id', $request->body()->id_ecole(), 'ecoles')) {
+                        \session()->set('errors',
+                        !session()->has('errors') ? [] : [
+                            'id_ecole' => $this->locales['create']['id_ecole_invalid']
+                        ]);
+                    }
+    
+                    if (!session()->has('errors')) {
+                        if (!empty($personnel = $this->save($request, $response))) {
+                            $this->objetRetour['success'] = true;
+                            $this->objetRetour['message'] = $this->locales['update']['success'];
+                            $this->objetRetour['results'] = $personnel;
+                        }else {
+                            $this->objetRetour['message'] = $this->locales['update']['warning'];
+                            session()->set('errors', [
+                                'warning' => $this->locales['update']['warning']
+                            ]);
+                        }
+                    }
+                }
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
     }
