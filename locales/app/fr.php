@@ -152,4 +152,34 @@
                 "invalid_id" => "Veuillez renseigner un ID du personnel valide"
             ],
         ],
+
+        'default' => [
+            "creating" => [
+                'success' => "Création effectuée avec succès",
+                'warning' => "Une erreur est survenue lors de la création ".$error_persiste
+            ],
+
+            'updating' => [
+                'success' => "Modification faite avec succès",
+                'warning' => "Une erreur est survenue lors de la mofication ".$error_persiste,
+            ],
+
+            "desactive" => [
+                "already_desactived" => "Cet enregistrement est déjà désactivé",
+                "success" => "Désactivation effectuée avec succès",
+                "warning" => "Une erreur est survenue lors de la désactivation ".$error_persiste,
+            ],
+
+            "active" => [
+                "already_actived" => "Cet enregistrement est déjà activé",
+                "success" => "Activation effectuée avec succès",
+                "warning" => "Une erreur est survenue lors de la l'activation ".$error_persiste,
+            ],
+
+            "find" => [
+                "success" => "Enregistrement(s) trouvé(s) avec succès",
+                "nothing" => "Aucun enregistrement trouvé pour cet ID",
+                "invalid_id" => "Veuillez renseigner un ID de l'enregistrement valide"
+            ],
+        ],
     ];

@@ -11,6 +11,7 @@
     $acteurs = require './routes/acteurs.php';
     $medias  = require './routes/medias.php';
     $personnels  = require './routes/personnels.php';
+    $modules  = require './routes/modules.php';
 
     // Middlewares
     $app->middleware('errors', function (Middleware $middleware) {
@@ -24,3 +25,4 @@
     $app->use('/acteurs', $acteurs);
     $app->use('/medias', $medias);
     $app->use('/personnels', $personnels);
+    $app->use('/modules', $modules);

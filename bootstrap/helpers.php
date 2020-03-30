@@ -13,6 +13,7 @@
          * @return array
          */
         function locales(string $object, string $lang = 'fr') {
+            $lang = request()->headers()->has('Locale') ? request()->headers()->get('Locale') : $lang;
             $locales_path = config('path.locales');
             $locales_path = __DIR__.'/../'.$locales_path.'/'.$object.'/'.$lang.'.php';
 

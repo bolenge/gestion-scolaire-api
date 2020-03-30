@@ -390,6 +390,26 @@
                 }
             }
         },
+        "/modules/createModule": {
+            "post": {
+                "tags": [
+                    "Modules"
+                ],
+                "summary": "Permet de créer une nouveau module",
+                "operationId": "App\\Controllers\\ModulesController::createModule",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/moduleRequestBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
         "/personnels/createPersonnel": {
             "post": {
                 "tags": [
@@ -551,6 +571,24 @@
                         "type": "string"
                     },
                     "id_media_logo": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "module": {
+                "description": "Objet réprésentant un module",
+                "properties": {
+                    "intitule": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "tarif": {
+                        "type": "number"
+                    },
+                    "nbre_jours": {
                         "type": "integer"
                     }
                 },
@@ -768,6 +806,24 @@
                                 }
                             },
                             "type": "object"
+                        }
+                    }
+                }
+            },
+            "moduleRequestBody": {
+                "description": "Les données à renseigner pour la création d'un module",
+                "required": true,
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "required": [
+                                "intitule",
+                                "description",
+                                "tarif",
+                                "nbre_jours"
+                            ],
+                            "type": "object",
+                            "$ref": "#/components/schemas/module"
                         }
                     }
                 }
