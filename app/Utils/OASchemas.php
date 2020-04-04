@@ -41,6 +41,14 @@
          *      description="La ressource n'existe pas",
          *      @OA\JsonContent(ref="#/components/schemas/objetRetour")
          * )
+         *
+         * @OA\SecurityScheme(
+         *      bearerFormat="Token",
+         *      type="apiKey",
+         *      in="header",
+         *      name="Authorization",
+         *      securityScheme="bearer"
+         * )
          */
         protected $id;
     }

@@ -49,6 +49,6 @@
          */
         public function traitModulesUtilConstruct()
         {
-            $this->locales = \locales('app')['default'];
+            $this->locales = \locales('app')['modules'];
         }
     }

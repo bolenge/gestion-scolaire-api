@@ -407,6 +407,125 @@
                     "404": {
                         "$ref": "#/components/responses/NotFoundResponse"
                     }
+                },
+                "security": [
+                    "bearer"
+                ]
+            }
+        },
+        "/modules/updateModule/{id}": {
+            "put": {
+                "tags": [
+                    "Modules"
+                ],
+                "summary": "Permet de modifier les données d'un module",
+                "operationId": "App\\Controllers\\ModulesController::updateModule",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/moduleRequestBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/modules/activeModule/{id}": {
+            "put": {
+                "tags": [
+                    "Modules"
+                ],
+                "summary": "Permet de d'activer un module",
+                "operationId": "App\\Controllers\\ModulesController::activeModule",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/modules/desactiveModule/{id}": {
+            "delete": {
+                "tags": [
+                    "Modules"
+                ],
+                "summary": "Permet de désactiver un module",
+                "operationId": "App\\Controllers\\ModulesController::desactiveModule",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/modules/getModuleById/{id}": {
+            "get": {
+                "tags": [
+                    "Modules"
+                ],
+                "summary": "Renvoi les informations d'une module",
+                "operationId": "App\\Controllers\\ModulesController::getModuleById",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/modules/getListModules/{limit}/{offset}": {
+            "get": {
+                "tags": [
+                    "Modules"
+                ],
+                "summary": "Renvoi les écoles par limite",
+                "operationId": "App\\Controllers\\ModulesController::getListModules",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/offset"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
                 }
             }
         },
@@ -857,6 +976,14 @@
                         }
                     }
                 }
+            }
+        },
+        "securitySchemes": {
+            "bearer": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header",
+                "bearerFormat": "Token"
             }
         }
     }

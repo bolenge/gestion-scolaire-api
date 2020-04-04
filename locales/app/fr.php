@@ -156,7 +156,8 @@
         'default' => [
             "creating" => [
                 'success' => "Création effectuée avec succès",
-                'warning' => "Une erreur est survenue lors de la création ".$error_persiste
+                'warning' => "Une erreur est survenue lors de la création ".$error_persiste,
+                'desactive' => "Cet enregistrement a été désactivé, vous ne pouvez pas modifier ses données. Veuillez le réactiver avant de les modifier."
             ],
 
             'updating' => [
@@ -180,6 +181,37 @@
                 "success" => "Enregistrement(s) trouvé(s) avec succès",
                 "nothing" => "Aucun enregistrement trouvé pour cet ID",
                 "invalid_id" => "Veuillez renseigner un ID de l'enregistrement valide"
+            ],
+        ],
+
+        'modules' => [
+            "creating" => [
+                'success' => "Module créé avec succès",
+                'warning' => "Une erreur est survenue lors de la création du module ".$error_persiste,
+                'desactive' => "Ce module a été désactivé, vous ne pouvez pas modifier ses données. Veuillez le réactiver avant de les modifier."
+            ],
+
+            'updating' => [
+                'success' => "Modification du module faite avec succès",
+                'warning' => "Une erreur est survenue lors de la mofication du module ".$error_persiste,
+            ],
+
+            "desactive" => [
+                "already_desactived" => "Ce module est déjà désactivé",
+                "success" => "Désactivation du module effectuée avec succès",
+                "warning" => "Une erreur est survenue lors de la désactivation du module ".$error_persiste,
+            ],
+
+            "active" => [
+                "already_actived" => "Ce module est déjà activé",
+                "success" => "Activation du module effectuée avec succès",
+                "warning" => "Une erreur est survenue lors de la l'activation du module ".$error_persiste,
+            ],
+
+            "find" => [
+                "success" => "Module(s) trouvé(s) avec succès",
+                "nothing" => "Aucun module trouvé pour cet ID",
+                "invalid_id" => "Veuillez renseigner un ID d'un module valide"
             ],
         ],
     ];
