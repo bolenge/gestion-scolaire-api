@@ -15,6 +15,14 @@
          * )
          * 
          * @OA\Parameter(
+         *      name="id_ecole",
+         *      in="path",
+         *      description="ID de l'école",
+         *      required=true,
+         *      @OA\Schema(type="integer")
+         * )
+         * 
+         * @OA\Parameter(
          *      name="limit",
          *      in="path",
          *      description="Limite des données à renvoyer",

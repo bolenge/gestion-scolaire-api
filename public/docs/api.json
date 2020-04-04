@@ -11,6 +11,189 @@
         }
     ],
     "paths": {
+        "/abonnements/createAbonnement": {
+            "post": {
+                "tags": [
+                    "Abonnements"
+                ],
+                "summary": "Permet de créer un nouveau abonnement",
+                "operationId": "App\\Controllers\\AbonnementsController::createAbonnement",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/abonnementRequestBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                },
+                "security": [
+                    "bearer"
+                ]
+            }
+        },
+        "/abonnements/updateAbonnement/{id}": {
+            "put": {
+                "tags": [
+                    "Abonnements"
+                ],
+                "summary": "Permet de modifier les données d'un abonnement",
+                "operationId": "App\\Controllers\\AbonnementsController::updateAbonnement",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/abonnementRequestBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                },
+                "security": [
+                    "bearer"
+                ]
+            }
+        },
+        "/abonnements/activeAbonnement/{id}": {
+            "put": {
+                "tags": [
+                    "Abonnements"
+                ],
+                "summary": "Permet de d'activer un abonnement",
+                "operationId": "App\\Controllers\\AbonnementsController::activeAbonnement",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                },
+                "security": [
+                    "bearer"
+                ]
+            }
+        },
+        "/abonnements/desactiveAbonnement/{id}": {
+            "delete": {
+                "tags": [
+                    "Abonnements"
+                ],
+                "summary": "Permet de désactiver un abonnement",
+                "operationId": "App\\Controllers\\AbonnementsController::desactiveAbonnement",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                },
+                "security": [
+                    "bearer"
+                ]
+            }
+        },
+        "/abonnements/getAbonnementById/{id}": {
+            "get": {
+                "tags": [
+                    "Abonnements"
+                ],
+                "summary": "Renvoi les informations d'un abonnement",
+                "operationId": "App\\Controllers\\AbonnementsController::getAbonnementById",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                },
+                "security": [
+                    "bearer"
+                ]
+            }
+        },
+        "/abonnements/getListAbonnements/{limit}/{offset}": {
+            "get": {
+                "tags": [
+                    "Abonnements"
+                ],
+                "summary": "Renvoi les abonnements par limite",
+                "operationId": "App\\Controllers\\AbonnementsController::getListAbonnements",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/offset"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                },
+                "security": [
+                    "bearer"
+                ]
+            }
+        },
+        "/abonnements/beginEcoleAbonnement/{id}/{id_ecole}": {
+            "put": {
+                "tags": [
+                    "Abonnements"
+                ],
+                "summary": "Permet de d'activer un abonnement",
+                "operationId": "App\\Controllers\\AbonnementsController::beginEcoleAbonnement",
+                "parameters": [
+                    {
+                        "description": "ID de l'abonnement",
+                        "$ref": "#/components/parameters/id"
+                    },
+                    {
+                        "$ref": "#/components/parameters/id_ecole"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                },
+                "security": [
+                    "bearer"
+                ]
+            }
+        },
         "/acteurs/createActeur": {
             "post": {
                 "tags": [
@@ -395,7 +578,7 @@
                 "tags": [
                     "Modules"
                 ],
-                "summary": "Permet de créer une nouveau module",
+                "summary": "Permet de créer un nouveau module",
                 "operationId": "App\\Controllers\\ModulesController::createModule",
                 "requestBody": {
                     "$ref": "#/components/requestBodies/moduleRequestBody"
@@ -837,6 +1020,25 @@
     },
     "components": {
         "schemas": {
+            "abonnement": {
+                "description": "Objet réprésentant un abonnement",
+                "properties": {
+                    "id_module": {
+                        "type": "integer"
+                    },
+                    "id_ecole": {
+                        "type": "integer"
+                    },
+                    "montant_paye": {
+                        "type": "double"
+                    },
+                    "delai": {
+                        "description": "Le nombre de jour de l'abonnement",
+                        "type": "int"
+                    }
+                },
+                "type": "object"
+            },
             "ecole": {
                 "description": "Objet réprésentant une école",
                 "properties": {
@@ -954,6 +1156,15 @@
                     "type": "integer"
                 }
             },
+            "id_ecole": {
+                "name": "id_ecole",
+                "in": "path",
+                "description": "ID de l'école",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
             "limit": {
                 "name": "limit",
                 "in": "path",
@@ -972,6 +1183,24 @@
             }
         },
         "requestBodies": {
+            "abonnementRequestBody": {
+                "description": "Les données à renseigner pour la création d'un abonnement",
+                "required": true,
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "required": [
+                                "id_module",
+                                "id_ecole",
+                                "montant_paye",
+                                "delai"
+                            ],
+                            "type": "object",
+                            "$ref": "#/components/schemas/abonnement"
+                        }
+                    }
+                }
+            },
             "createActeurRequest": {
                 "description": "Les données à renseigner",
                 "required": true,

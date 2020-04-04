@@ -13,6 +13,7 @@
     $personnels  = require './routes/personnels.php';
     $modules  = require './routes/modules.php';
     $sous_modules  = require './routes/sous_modules.php';
+    $abonnements  = require './routes/abonnements.php';
 
     // Middlewares
     $app->middleware('errors', function (Middleware $middleware) {
@@ -28,3 +29,4 @@
     $app->use('/personnels', $personnels);
     $app->use('/modules', $modules);
     $app->use('/sousModules', $sous_modules);
+    $app->use('/abonnements', $abonnements);

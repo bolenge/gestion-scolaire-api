@@ -8,33 +8,33 @@
     use Ekolo\Framework\Http\Request;
     use Ekolo\Framework\Http\Response;
     
-    use App\Utils\ModulesUtil;
-    use App\Repositories\ModulesRepository;
+    use App\Utils\AbonnementsUtil;
+    use App\Repositories\AbonnementsRepository;
 
     /**
-     * Controlleur pour les modules
+     * Controlleur pour les abonnements
      */
-    class ModulesController extends Controller {
+    class AbonnementsController extends Controller {
 
-        use ModulesUtil;
-        use ModulesRepository;
+        use AbonnementsUtil;
+        use AbonnementsRepository;
 
         /**
          * Les méthodes considerées comme des __contruct des traits
          */
         protected $traitsContructs = [
-            'traitModulesUtilConstruct',
-            'traitModulesRepositoryConstruct'
+            'traitAbonnementsUtilConstruct',
+            'traitAbonnementsRepositoryConstruct'
         ];
 
         /**
-         * Permet de créer un nouveau module
+         * Permet de créer un nouveau abonnement
          * 
          * @OA\Post(
-         *      path="/modules/createModule",
-         *      tags={"Modules"},
+         *      path="/abonnements/createAbonnement",
+         *      tags={"Abonnements"},
          *      security={"bearer"},
-         *      @OA\RequestBody(ref="#/components/requestBodies/moduleRequestBody"),
+         *      @OA\RequestBody(ref="#/components/requestBodies/abonnementRequestBody"),
          *      @OA\Response(
          *          response="200",
          *          ref="#/components/responses/SuccessResponse"
@@ -45,18 +45,23 @@
          *      )
          * )
          */
-        public function createModule(Request $request, Response $response)
+        public function createAbonnement(Request $request, Response $response)
         {
             if ($request->validator($this->rules)) {
-                if (!empty($module = $this->save($request, $response))) {
-                    $this->objetRetour['success'] = true;
-                    $this->objetRetour['message'] = \locales('app')['modules']['creating']['success'];
-                    $this->objetRetour['results'] = $module;
-                }else {
-                    $this->objetRetour['message'] = \locales('app')['modules']['creating']['warning'];
-                    session()->set('errors', [
-                        'warning' => \locales('app')['modules']['creating']['warning']
-                    ]);
+
+                $this->trackErrorsModuleAndEcole($request, $response);
+
+                if (empty(session()->get('errors'))) {
+                    if (!empty($abonnement = $this->save($request, $response))) {
+                        $this->objetRetour['success'] = true;
+                        $this->objetRetour['message'] = $this->locales['creating']['success'];
+                        $this->objetRetour['results'] = $abonnement;
+                    }else {
+                        $this->objetRetour['message'] = $this->locales['creating']['warning'];
+                        session()->set('errors', [
+                            'warning' => $this->locales['creating']['warning']
+                        ]);
+                    }
                 }
             }
 
@@ -65,14 +70,14 @@
         }
 
         /**
-         * Permet de modifier les données d'un module
+         * Permet de modifier les données d'un abonnement
          * 
          * @OA\Put(
-         *      path="/modules/updateModule/{id}",
-         *      tags={"Modules"},
+         *      path="/abonnements/updateAbonnement/{id}",
+         *      tags={"Abonnements"},
          *      security={"bearer"},
          *      @OA\Parameter(ref="#/components/parameters/id"),
-         *      @OA\RequestBody(ref="#/components/requestBodies/moduleRequestBody"),
+         *      @OA\RequestBody(ref="#/components/requestBodies/abonnementRequestBody"),
          *      @OA\Response(
          *          response="200",
          *          ref="#/components/responses/SuccessResponse"
@@ -83,30 +88,34 @@
          *      )
          * )
          */
-        public function updateModule(Request $request, Response $response)
+        public function updateAbonnement(Request $request, Response $response)
         {   
             $request->body()->set('id', $request->params()->get('id'));
             
             if ($request->validator($this->rules)) {
-                $module = $this->model->findOne([
+                $abonnement = $this->model->findOne([
                     'cond' => 'id='.$request->body()->id()
                 ]);
 
-                if (!empty($module)) {
-                    if ($module->flag == "0") {
+                if (!empty($abonnement)) {
+                    if ($abonnement->flag == "0") {
                         session()->set('errors', [
                             'warning' => $this->locales['updating']['desactive']
                         ]);
                     }else {
-                        if (!empty($module = $this->save($request, $response))) {
-                            $this->objetRetour['success'] = true;
-                            $this->objetRetour['message'] = $this->locales['updating']['success'];
-                            $this->objetRetour['results'] = $module;
-                        }else {
-                            $this->objetRetour['message'] = $this->locales['updating']['warning'];
-                            session()->set('errors', [
-                                'warning' => $this->locales['updating']['warning']
-                            ]);
+                        $this->trackErrorsModuleAndEcole($request, $response);
+
+                        if (!session()->has('errors')) {
+                            if (!empty($abonnement = $this->save($request, $response))) {
+                                $this->objetRetour['success'] = true;
+                                $this->objetRetour['message'] = $this->locales['updating']['success'];
+                                $this->objetRetour['results'] = $abonnement;
+                            }else {
+                                $this->objetRetour['message'] = $this->locales['updating']['warning'];
+                                session()->set('errors', [
+                                    'warning' => $this->locales['updating']['warning']
+                                ]);
+                            }
                         }
                     }
                 }else {
@@ -121,11 +130,11 @@
         }
 
         /**
-         * Permet de d'activer un module
+         * Permet de d'activer un abonnement
          * 
          * @OA\Put(
-         *      path="/modules/activeModule/{id}",
-         *      tags={"Modules"},
+         *      path="/abonnements/activeAbonnement/{id}",
+         *      tags={"Abonnements"},
          *      security={"bearer"},
          *      @OA\Parameter(ref="#/components/parameters/id"),
          *      @OA\Response(
@@ -138,14 +147,14 @@
          *      )
          * )
          */
-        public function activeModule(Request $request, Response $response)
+        public function activeAbonnement(Request $request, Response $response)
         {   
             $request->body()->set('id', $request->params()->get('id'));
             
             if ($request->validator($this->rules)) {
-                if (!empty($module = $this->model->findOneById($request->body()->get('id')))) {
+                if (!empty($abonnement = $this->model->findOneById($request->body()->get('id')))) {
                     
-                    if ($module->flag == "1") {
+                    if ($abonnement->flag == "1") {
                         session()->set('errors', [
                             'warning' => $this->locales['active']['already_actived']
                         ]);
@@ -156,10 +165,10 @@
                         ]);
 
                         if ($result) {
-                            $module->flag = "1";
+                            $abonnement->flag = "1";
                             $this->objetRetour['success'] = true;
                             $this->objetRetour['message'] = $this->locales['active']['success'];
-                            $this->objetRetour['results'] = $module;
+                            $this->objetRetour['results'] = $abonnement;
                         }else {
                             session()->set('errors', [
                                 'warning' => $this->locales['active']['warning']
@@ -178,11 +187,11 @@
         }
 
         /**
-         * Permet de désactiver un module
+         * Permet de désactiver un abonnement
          * 
          * @OA\Delete(
-         *      path="/modules/desactiveModule/{id}",
-         *      tags={"Modules"},
+         *      path="/abonnements/desactiveAbonnement/{id}",
+         *      tags={"Abonnements"},
          *      security={"bearer"},
          *      @OA\Parameter(ref="#/components/parameters/id"),
          *      @OA\Response(
@@ -195,14 +204,14 @@
          *      )
          * )
          */
-        public function desactiveModule(Request $request, Response $response)
+        public function desactiveAbonnement(Request $request, Response $response)
         {   
             $request->body()->set('id', $request->params()->get('id'));
             
             if ($request->validator($this->rules)) {
-                if (!empty($module = $this->model->findOneById($request->body()->get('id')))) {
+                if (!empty($abonnement = $this->model->findOneById($request->body()->get('id')))) {
                     
-                    if ($module->flag == "0") {
+                    if ($abonnement->flag == "0") {
                         session()->set('errors', [
                             'warning' => $this->locales['desactive']['already_desactived']
                         ]);
@@ -235,11 +244,11 @@
         }
 
         /**
-         * Renvoi les informations d'un module
+         * Renvoi les informations d'un abonnement
          * 
          * @OA\Get(
-         *      path="/modules/getModuleById/{id}",
-         *      tags={"Modules"},
+         *      path="/abonnements/getAbonnementById/{id}",
+         *      tags={"Abonnements"},
          *      security={"bearer"},
          *      @OA\Parameter(ref="#/components/parameters/id"),
          *      @OA\Response(
@@ -252,15 +261,15 @@
          *      )
          * )
          */
-        public function getModuleById(Request $request, Response $response)
+        public function getAbonnementById(Request $request, Response $response)
         {
             if ($request->params()->has('id') && \is_int_valid($request->params()->get('id'))) {
-                $module = current($this->model->findById($request->params()->get('id')));
+                $abonnement = current($this->model->findById($request->params()->get('id')));
 
-                if (!empty($module)) {
+                if (!empty($abonnement)) {
                     $this->objetRetour['success'] = true;
                     $this->objetRetour['message'] = $this->locales['find']['success'];
-                    $this->objetRetour['results'] = $module;
+                    $this->objetRetour['results'] = $abonnement;
                 }else {
                     \session('errors', [
                         'warning' => $this->locales['find']['nothing']
@@ -277,11 +286,11 @@
         }
 
         /**
-         * Renvoi les modules par limite
+         * Renvoi les abonnements par limite
          * 
          * @OA\Get(
-         *      path="/modules/getListModules/{limit}/{offset}",
-         *      tags={"Modules"},
+         *      path="/abonnements/getListAbonnements/{limit}/{offset}",
+         *      tags={"Abonnements"},
          *      security={"bearer"},
          *      @OA\Parameter(ref="#/components/parameters/limit"),
          *      @OA\Parameter(ref="#/components/parameters/offset"),
@@ -295,21 +304,85 @@
          *      )
          * )
          */
-        public function getListModules(Request $request, Response $response)
+        public function getListAbonnements(Request $request, Response $response)
         {
             $limit  = \is_int_valid($request->params()->get('limit')) ? $request->params()->get('limit') : 10;
             $offset = $request->params()->has('offset') ? (int) $request->params()->get('offset') : 0;
 
-            $modules = $this->model->findAllModules($limit, $offset);
+            $abonnements = $this->model->findAllAbonnements($limit, $offset);
 
-            if (!empty($modules)) {
+            if (!empty($abonnements)) {
                 $this->objetRetour['success'] = true;
-                $this->objetRetour['message'] = count($modules).' '.$this->locales['find']['success'];
-                $this->objetRetour['results'] = $modules;
+                $this->objetRetour['message'] = count($abonnements).' '.$this->locales['find']['success'];
+                $this->objetRetour['results'] = $abonnements;
             }else {
                 \session('errors', [
                     'warning' => $this->locales['find']['nothing']
                 ]);
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
+
+        /**
+         * Permet de d'activer un abonnement
+         * 
+         * @OA\Put(
+         *      path="/abonnements/beginEcoleAbonnement/{id}/{id_ecole}",
+         *      tags={"Abonnements"},
+         *      security={"bearer"},
+         *      @OA\Parameter(ref="#/components/parameters/id", description="ID de l'abonnement"),
+         *      @OA\Parameter(ref="#/components/parameters/id_ecole"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function beginEcoleAbonnement(Request $request, Response $response)
+        {   
+            $request->body()->set('id', $request->params()->get('id'));
+            $request->body()->set('id_ecole', $request->params()->get('id_ecole'));
+            
+            if ($request->validator($this->rules)) {
+                if (!empty($abonnement = $this->model->findOneById($request->body()->get('id')))) {
+                    if ($abonnement->flag == "1") {
+                        if ($abonnement->id_ecole === $request->body()->id_ecole()) {
+                            $delai = (int) $abonnement->delai;
+                            $id_abonnement = (int) $request->body()->id();
+                            $result = $this->model->activateAbonnement($id_abonnement, $delai);
+    
+                            if ($result) {
+                                $abonnement = $this->model->findOneById($request->body()->get('id'));
+                                
+                                $this->objetRetour['success'] = true;
+                                $this->objetRetour['message'] = $this->locales['activate_abonnement']['success'];
+                                $this->objetRetour['results'] = $abonnement;
+                            }else {
+                                session()->set('errors', [
+                                    'warning' => $this->locales['activate_abonnement']['warning']
+                                ]);
+                            }
+                        }else {
+                            session()->set('errors', [
+                                'id_ecole' => $this->locales['activate_abonnement']['invalid_id_ecole_abonneent']
+                            ]);
+                        }
+                    }else {
+                        session()->set('errors', [
+                            'id' => $this->locales['activate_abonnement']['expire_or_noactive']
+                        ]);
+                    }
+                }else {
+                    \session()->set('errors', [
+                        'id' => $this->locales['find']['nothing']
+                    ]);
+                }
             }
 
             $this->trackErrors();

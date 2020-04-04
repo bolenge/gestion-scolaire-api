@@ -246,7 +246,50 @@
             "find" => [
                 "success" => "Sous module(s) trouvé(s) avec succès",
                 "nothing" => "Aucun sous module trouvé pour cet ID",
-                "invalid_id" => "Veuillez renseigner un ID d'un sosu module valide"
+                "invalid_id" => "Veuillez renseigner un ID d'un sous module valide"
             ],
+        ],
+
+        'abonnements' => [
+            "creating" => [
+                'success' => "Abonnement créé avec succès",
+                'warning' => "Une erreur est survenue lors de la création du abonnement ".$error_persiste,
+                'desactive' => "Ce abonnement a été désactivé, vous ne pouvez pas modifier ses données. Veuillez le réactiver avant de les modifier.",
+                'module_desactived' => "Vous ne pouvez pas lié un abonnement à un module désactivé",
+                'ecole_desactived' => "Vous ne pouvez pas lié un abonnement à une ecole désactivée",
+            ],
+
+            'updating' => [
+                'success' => "Modification du abonnement faite avec succès",
+                'warning' => "Une erreur est survenue lors de la mofication du abonnement ".$error_persiste,
+                'module_desactived' => "Vous ne pouvez pas modifier les éléments (abonnement) lié à un module désactivé",
+                'desactive' => "Ce abonnement a été désactivé, vous ne pouvez pas modifier ses données. Veuillez le réactiver avant de les modifier.",
+                'ecole_desactived' => "Vous ne pouvez pas modifier un abonnement lié à une ecole désactivée",
+            ],
+
+            "desactive" => [
+                "already_desactived" => "Cet abonnement est déjà désactivé",
+                "success" => "Désactivation du abonnement effectuée avec succès",
+                "warning" => "Une erreur est survenue lors de la désactivation du abonnement ".$error_persiste,
+            ],
+
+            "active" => [
+                "already_actived" => "Cet abonnement est déjà activé",
+                "success" => "Activation du abonnement effectuée avec succès",
+                "warning" => "Une erreur est survenue lors de la l'activation du abonnement ".$error_persiste,
+            ],
+
+            "find" => [
+                "success" => "abonnement(s) trouvé(s) avec succès",
+                "nothing" => "Aucun abonnement trouvé pour cet ID",
+                "invalid_id" => "Veuillez renseigner un ID d'un abonnement valide",
+            ],
+
+            "activate_abonnement" => [
+                "success" => "Abonnement activé avec succès",
+                "expire_or_noactive" => "Cet abonnement est expiré ou inactif",
+                "invalid_id_ecole_abonneent" => "Cette école n'a souscrit à cet abonnement",
+                "warning" => "Une erreur est survenue lors de l'activation de l'abonnement ".$error_persiste,
+            ]
         ],
     ];
