@@ -435,7 +435,10 @@
                     "404": {
                         "$ref": "#/components/responses/NotFoundResponse"
                     }
-                }
+                },
+                "security": [
+                    "bearer"
+                ]
             }
         },
         "/modules/activeModule/{id}": {
@@ -457,7 +460,10 @@
                     "404": {
                         "$ref": "#/components/responses/NotFoundResponse"
                     }
-                }
+                },
+                "security": [
+                    "bearer"
+                ]
             }
         },
         "/modules/desactiveModule/{id}": {
@@ -479,7 +485,10 @@
                     "404": {
                         "$ref": "#/components/responses/NotFoundResponse"
                     }
-                }
+                },
+                "security": [
+                    "bearer"
+                ]
             }
         },
         "/modules/getModuleById/{id}": {
@@ -487,7 +496,7 @@
                 "tags": [
                     "Modules"
                 ],
-                "summary": "Renvoi les informations d'une module",
+                "summary": "Renvoi les informations d'un module",
                 "operationId": "App\\Controllers\\ModulesController::getModuleById",
                 "parameters": [
                     {
@@ -501,7 +510,10 @@
                     "404": {
                         "$ref": "#/components/responses/NotFoundResponse"
                     }
-                }
+                },
+                "security": [
+                    "bearer"
+                ]
             }
         },
         "/modules/getListModules/{limit}/{offset}": {
@@ -509,7 +521,7 @@
                 "tags": [
                     "Modules"
                 ],
-                "summary": "Renvoi les écoles par limite",
+                "summary": "Renvoi les modules par limite",
                 "operationId": "App\\Controllers\\ModulesController::getListModules",
                 "parameters": [
                     {
@@ -526,7 +538,10 @@
                     "404": {
                         "$ref": "#/components/responses/NotFoundResponse"
                     }
-                }
+                },
+                "security": [
+                    "bearer"
+                ]
             }
         },
         "/personnels/createPersonnel": {
@@ -664,6 +679,160 @@
                     }
                 }
             }
+        },
+        "/sousModules/createSousModule": {
+            "post": {
+                "tags": [
+                    "Sous modules"
+                ],
+                "summary": "Permet de créer un nouveau sous module",
+                "operationId": "App\\Controllers\\SousModulesController::createSousModule",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/sousModuleRequestBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                },
+                "security": [
+                    "bearer"
+                ]
+            }
+        },
+        "/sousModules/updateSousModule/{id}": {
+            "put": {
+                "tags": [
+                    "Sous modules"
+                ],
+                "summary": "Permet de modifier les données d'un sous module",
+                "operationId": "App\\Controllers\\SousModulesController::updateSousModule",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/sousModuleRequestBody"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                },
+                "security": [
+                    "bearer"
+                ]
+            }
+        },
+        "/sousModules/activeSousModule/{id}": {
+            "put": {
+                "tags": [
+                    "Sous modules"
+                ],
+                "summary": "Permet de d'activer un sous module",
+                "operationId": "App\\Controllers\\SousModulesController::activeSousModule",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                },
+                "security": [
+                    "bearer"
+                ]
+            }
+        },
+        "/sousModules/desactiveSousModule/{id}": {
+            "delete": {
+                "tags": [
+                    "Sous modules"
+                ],
+                "summary": "Permet de désactiver un sous module",
+                "operationId": "App\\Controllers\\SousModulesController::desactiveSousModule",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                },
+                "security": [
+                    "bearer"
+                ]
+            }
+        },
+        "/sousModules/getSousModuleById/{id}": {
+            "get": {
+                "tags": [
+                    "Sous modules"
+                ],
+                "summary": "Renvoi les informations d'un sous module",
+                "operationId": "App\\Controllers\\SousModulesController::getSousModuleById",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                },
+                "security": [
+                    "bearer"
+                ]
+            }
+        },
+        "/sousModules/getListSousModules/{limit}/{offset}": {
+            "get": {
+                "tags": [
+                    "Sous modules"
+                ],
+                "summary": "Renvoi la liste des sous modules par limite",
+                "operationId": "App\\Controllers\\SousModulesController::getListSousModules",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/offset"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                },
+                "security": [
+                    "bearer"
+                ]
+            }
         }
     },
     "components": {
@@ -709,6 +878,21 @@
                     },
                     "nbre_jours": {
                         "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "sousModule": {
+                "description": "Objet réprésentant un sous module",
+                "properties": {
+                    "id_module": {
+                        "type": "integer"
+                    },
+                    "intitule": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -973,6 +1157,23 @@
                                 }
                             },
                             "type": "object"
+                        }
+                    }
+                }
+            },
+            "sousModuleRequestBody": {
+                "description": "Les données à renseigner pour la création d'un sous module",
+                "required": true,
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "required": [
+                                "intitule",
+                                "description",
+                                "id_module"
+                            ],
+                            "type": "object",
+                            "$ref": "#/components/schemas/sousModule"
                         }
                     }
                 }

@@ -4,18 +4,18 @@
     use Ekolo\Framework\Bootstrap\Model;
 
     /**
-     * Model pour les modules
+     * Model pour les sous modules
      */
-    class ModulesModel extends Model
+    class SousModulesModel extends Model
     {
         public function __construct()
         {
             parent::__construct();
-            $this->setTable('modules');
+            $this->setTable('sous_modules');
         }
 
         /**
-         * Trouve toutes les modules par limit
+         * Trouve toutes les sous modules par limit
          * @param int $limit
          * @param int $offset
          * @return  object

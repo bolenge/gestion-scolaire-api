@@ -12,6 +12,7 @@
     $medias  = require './routes/medias.php';
     $personnels  = require './routes/personnels.php';
     $modules  = require './routes/modules.php';
+    $sous_modules  = require './routes/sous_modules.php';
 
     // Middlewares
     $app->middleware('errors', function (Middleware $middleware) {
@@ -26,3 +27,4 @@
     $app->use('/medias', $medias);
     $app->use('/personnels', $personnels);
     $app->use('/modules', $modules);
+    $app->use('/sousModules', $sous_modules);

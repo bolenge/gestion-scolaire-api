@@ -7,22 +7,22 @@
     use Ekolo\Framework\Http\Response;
 
     use App\Repositories\Repository;
-    use App\Models\ModulesModel;
+    use App\Models\SousModulesModel;
 
     /**
-     * Repository pour les modules
+     * Repository pour les sous modules
      */
-    trait ModulesRepository
+    trait SousModulesRepository
     {
         use Repository;
 
         /**
          * Réprésente le __construct de ce trait
          */
-        public function traitModulesRepositoryConstruct()
+        public function traitSousModulesRepositoryConstruct()
         {
-            $this->model = new ModulesModel;
-            $this->table = 'modules';
+            $this->model = new SousModulesModel;
+            $this->table = 'sous_modules';
         }
 
         /**
@@ -34,8 +34,7 @@
             $data = [
                 'intitule' => $request->body()->intitule(),
                 'description' => $request->body()->description(),
-                'tarif' => $request->body()->tarif(),
-                'nbre_jours' => $request->body()->nbre_jours()
+                'id_module' => $request->body()->id_module()
             ];
 
             if (!empty($request->body()->id())) {

@@ -5,30 +5,32 @@
     use OpenApi\Annotations as OA;
     use App\Utils\Util;
     
-    trait ModulesUtil
+    /**
+     * Util des sous modules des écoles
+     */
+    trait SousModulesUtil
     {
         use Util;
         
         /**
          * @OA\Schema(
-         *      schema="module",
-         *      description="Objet réprésentant un module",
+         *      schema="sousModule",
+         *      description="Objet réprésentant un sous module",
+         *      @OA\Property(type="integer", property="id_module"),
          *      @OA\Property(type="string", property="intitule"),
-         *      @OA\Property(type="string", property="description"),
-         *      @OA\Property(type="number", property="tarif"),
-         *      @OA\Property(type="integer", property="nbre_jours")
+         *      @OA\Property(type="string", property="description")
          * )
          * 
          * @OA\RequestBody(
-         * 		request="moduleRequestBody",
-         * 		description="Les données à renseigner pour la création d'un module",
+         * 		request="sousModuleRequestBody",
+         * 		description="Les données à renseigner pour la création d'un sous module",
          *		required=true,
          *      @OA\MediaType(
          *      	mediaType="application/x-www-form-urlencoded",
          *          @OA\Schema(
          *          	type="object",
-         *				required={"intitule", "description", "tarif", "nbre_jours"},
-         *              ref="#/components/schemas/module"
+         *				required={"intitule", "description", "id_module"},
+         *              ref="#/components/schemas/sousModule"
          *         )
          *     )
          * )
@@ -39,15 +41,14 @@
             'id' => 'int',
             'intitule' => 'required|min:2|max:300|alpha',
             'descitption' => 'required|min:5|alpha',
-            'tarif' => 'required|numeric',
-            'nbre_jours' => 'required|int'
+            'id_module' => 'required|int'
         ];
 
         /**
          * Réprésente le __construct de ce trait
          */
-        public function traitModulesUtilConstruct()
+        public function traitSousModulesUtilConstruct()
         {
-            $this->locales = \locales('app')['modules'];
+            $this->locales = \locales('app')['sous_modules'];
         }
     }

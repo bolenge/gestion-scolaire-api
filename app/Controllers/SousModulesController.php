@@ -8,33 +8,33 @@
     use Ekolo\Framework\Http\Request;
     use Ekolo\Framework\Http\Response;
     
-    use App\Utils\ModulesUtil;
-    use App\Repositories\ModulesRepository;
+    use App\Utils\SousModulesUtil;
+    use App\Repositories\SousModulesRepository;
 
     /**
-     * Controlleur pour les modules
+     * Controlleur pour les sous modules
      */
-    class ModulesController extends Controller {
+    class SousModulesController extends Controller {
 
-        use ModulesUtil;
-        use ModulesRepository;
+        use SousModulesUtil;
+        use SousModulesRepository;
 
         /**
          * Les méthodes considerées comme des __contruct des traits
          */
         protected $traitsContructs = [
-            'traitModulesUtilConstruct',
-            'traitModulesRepositoryConstruct'
+            'traitSousModulesUtilConstruct',
+            'traitSousModulesRepositoryConstruct'
         ];
 
         /**
-         * Permet de créer une nouveau module
+         * Permet de créer un nouveau sous module
          * 
          * @OA\Post(
-         *      path="/modules/createModule",
-         *      tags={"Modules"},
+         *      path="/sousModules/createSousModule",
+         *      tags={"Sous modules"},
          *      security={"bearer"},
-         *      @OA\RequestBody(ref="#/components/requestBodies/moduleRequestBody"),
+         *      @OA\RequestBody(ref="#/components/requestBodies/sousModuleRequestBody"),
          *      @OA\Response(
          *          response="200",
          *          ref="#/components/responses/SuccessResponse"
@@ -45,73 +45,31 @@
          *      )
          * )
          */
-        public function createModule(Request $request, Response $response)
+        public function createSousModule(Request $request, Response $response)
         {
             if ($request->validator($this->rules)) {
-                if (!empty($module = $this->save($request, $response))) {
-                    $this->objetRetour['success'] = true;
-                    $this->objetRetour['message'] = \locales('app')['modules']['creating']['success'];
-                    $this->objetRetour['results'] = $module;
-                }else {
-                    $this->objetRetour['message'] = \locales('app')['modules']['creating']['warning'];
-                    session()->set('errors', [
-                        'warning' => \locales('app')['modules']['creating']['warning']
-                    ]);
-                }
-            }
-
-            $this->trackErrors();
-            $response->json($this->objetRetour);
-        }
-
-        /**
-         * Permet de modifier les données d'un module
-         * 
-         * @OA\Put(
-         *      path="/modules/updateModule/{id}",
-         *      tags={"Modules"},
-         *      security={"bearer"},
-         *      @OA\Parameter(ref="#/components/parameters/id"),
-         *      @OA\RequestBody(ref="#/components/requestBodies/moduleRequestBody"),
-         *      @OA\Response(
-         *          response="200",
-         *          ref="#/components/responses/SuccessResponse"
-         *      ),
-         *      @OA\Response(
-         *          response="404",
-         *          ref="#/components/responses/NotFoundResponse"
-         *      )
-         * )
-         */
-        public function updateModule(Request $request, Response $response)
-        {   
-            $request->body()->set('id', $request->params()->get('id'));
-            
-            if ($request->validator($this->rules)) {
-                $module = $this->model->findOne([
-                    'cond' => 'id='.$request->body()->id()
-                ]);
-
-                if (!empty($module)) {
-                    if ($module->flag == "0") {
-                        session()->set('errors', [
-                            'warning' => $this->locales['updating']['desactive']
+                
+                if (!empty($module = $this->model->findOneById($request->body('id_module'), 'modules'))) {
+                    if ($module->flag === '0') {
+                        \session()->set('errors', [
+                            'warning' => $this->locales['creating']['module_desactived']
                         ]);
                     }else {
-                        if (!empty($module = $this->save($request, $response))) {
+                        
+                        if (!empty($sous_module = $this->save($request, $response))) {
                             $this->objetRetour['success'] = true;
-                            $this->objetRetour['message'] = $this->locales['updating']['success'];
-                            $this->objetRetour['results'] = $module;
+                            $this->objetRetour['message'] = $this->locales['creating']['success'];
+                            $this->objetRetour['results'] = $sous_module;
                         }else {
-                            $this->objetRetour['message'] = $this->locales['updating']['warning'];
+                            $this->objetRetour['message'] = $this->locales['creating']['warning'];
                             session()->set('errors', [
-                                'warning' => $this->locales['updating']['warning']
+                                'warning' => $this->locales['creating']['warning']
                             ]);
                         }
                     }
                 }else {
-                    \session()->set('errors', [
-                        'warning' => $this->locales['verify']['empty']
+                    session()->set('errors', [
+                        'id_module' => \locales('app')['modules']['find']['invalid_id']
                     ]);
                 }
             }
@@ -121,11 +79,79 @@
         }
 
         /**
-         * Permet de d'activer un module
+         * Permet de modifier les données d'un sous module
          * 
          * @OA\Put(
-         *      path="/modules/activeModule/{id}",
-         *      tags={"Modules"},
+         *      path="/sousModules/updateSousModule/{id}",
+         *      tags={"Sous modules"},
+         *      security={"bearer"},
+         *      @OA\Parameter(ref="#/components/parameters/id"),
+         *      @OA\RequestBody(ref="#/components/requestBodies/sousModuleRequestBody"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function updateSousModule(Request $request, Response $response)
+        {   
+            $request->body()->set('id', $request->params()->get('id'));
+            
+            if ($request->validator($this->rules)) {
+                if (!empty($module = $this->model->findOneById($request->body('id_module'), 'modules'))) {
+                    if ($module->flag === '0') {
+                        \session()->set('errors', [
+                            'warning' => $this->locales['updating']['module_desactived']
+                        ]);
+                    }else {
+                        $sous_module = $this->model->findOne([
+                            'cond' => 'id='.$request->body()->id()
+                        ], 'sous_modules');
+
+                        if (!empty($sous_module)) {
+                            if ($sous_module->flag == "0") {
+                                session()->set('errors', [
+                                    'warning' => $this->locales['updating']['desactive']
+                                ]);
+                            }else {
+                                if (!empty($sous_module = $this->save($request, $response))) {
+                                    $this->objetRetour['success'] = true;
+                                    $this->objetRetour['message'] = $this->locales['updating']['success'];
+                                    $this->objetRetour['results'] = $sous_module;
+                                }else {
+                                    $this->objetRetour['message'] = $this->locales['updating']['warning'];
+                                    session()->set('errors', [
+                                        'warning' => $this->locales['updating']['warning']
+                                    ]);
+                                }
+                            }
+                        }else {
+                            \session()->set('errors', [
+                                'warning' => $this->locales['verify']['empty']
+                            ]);
+                        }
+                    }
+                }else {
+                    session()->set('errors', [
+                        'id_module' => \locales('app')['modules']['find']['invalid_id']
+                    ]);
+                }
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
+
+        /**
+         * Permet de d'activer un sous module
+         * 
+         * @OA\Put(
+         *      path="/sousModules/activeSousModule/{id}",
+         *      tags={"Sous modules"},
          *      security={"bearer"},
          *      @OA\Parameter(ref="#/components/parameters/id"),
          *      @OA\Response(
@@ -138,7 +164,7 @@
          *      )
          * )
          */
-        public function activeModule(Request $request, Response $response)
+        public function activeSousModule(Request $request, Response $response)
         {   
             $request->body()->set('id', $request->params()->get('id'));
             
@@ -178,11 +204,11 @@
         }
 
         /**
-         * Permet de désactiver un module
+         * Permet de désactiver un sous module
          * 
          * @OA\Delete(
-         *      path="/modules/desactiveModule/{id}",
-         *      tags={"Modules"},
+         *      path="/sousModules/desactiveSousModule/{id}",
+         *      tags={"Sous modules"},
          *      security={"bearer"},
          *      @OA\Parameter(ref="#/components/parameters/id"),
          *      @OA\Response(
@@ -195,7 +221,7 @@
          *      )
          * )
          */
-        public function desactiveModule(Request $request, Response $response)
+        public function desactiveSousModule(Request $request, Response $response)
         {   
             $request->body()->set('id', $request->params()->get('id'));
             
@@ -235,11 +261,11 @@
         }
 
         /**
-         * Renvoi les informations d'un module
+         * Renvoi les informations d'un sous module
          * 
          * @OA\Get(
-         *      path="/modules/getModuleById/{id}",
-         *      tags={"Modules"},
+         *      path="/sousModules/getSousModuleById/{id}",
+         *      tags={"Sous modules"},
          *      security={"bearer"},
          *      @OA\Parameter(ref="#/components/parameters/id"),
          *      @OA\Response(
@@ -252,7 +278,7 @@
          *      )
          * )
          */
-        public function getModuleById(Request $request, Response $response)
+        public function getSousModuleById(Request $request, Response $response)
         {
             if ($request->params()->has('id') && \is_int_valid($request->params()->get('id'))) {
                 $module = current($this->model->findById($request->params()->get('id')));
@@ -277,11 +303,11 @@
         }
 
         /**
-         * Renvoi les modules par limite
+         * Renvoi la liste des sous modules par limite
          * 
          * @OA\Get(
-         *      path="/modules/getListModules/{limit}/{offset}",
-         *      tags={"Modules"},
+         *      path="/sousModules/getListSousModules/{limit}/{offset}",
+         *      tags={"Sous modules"},
          *      security={"bearer"},
          *      @OA\Parameter(ref="#/components/parameters/limit"),
          *      @OA\Parameter(ref="#/components/parameters/offset"),
@@ -295,7 +321,7 @@
          *      )
          * )
          */
-        public function getListModules(Request $request, Response $response)
+        public function getListSousModules(Request $request, Response $response)
         {
             $limit  = \is_int_valid($request->params()->get('limit')) ? $request->params()->get('limit') : 10;
             $offset = $request->params()->has('offset') ? (int) $request->params()->get('offset') : 0;
