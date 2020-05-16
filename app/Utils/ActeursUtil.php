@@ -19,7 +19,7 @@
          *      	mediaType="application/x-www-form-urlencoded",
          *          @OA\Schema(
          *          	type="object",
-         *				required={"nom", "email", "sexe"},
+         *				required={"nom", "email"},
          *              @OA\Property(type="string", property="nom"),
          *              @OA\Property(type="string", property="sexe"),
          *              @OA\Property(type="string", property="email"),
@@ -37,7 +37,7 @@
          */
         protected $rulesCreating = [
             'nom' => 'required|min:3|max:100|alpha',
-            'sexe' => 'required|alpha:1',
+            'sexe' => 'alpha:1',
             'email' => 'required|email',
             'prenom' => 'min:3|max:100|alpha',
             'postnom' => 'min:3|max:100|alpha',

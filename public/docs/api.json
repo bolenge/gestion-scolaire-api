@@ -1209,8 +1209,7 @@
                         "schema": {
                             "required": [
                                 "nom",
-                                "email",
-                                "sexe"
+                                "email"
                             ],
                             "properties": {
                                 "nom": {
