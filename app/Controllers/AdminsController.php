@@ -152,17 +152,23 @@
                 }
 
                 if ($this->model->exists('username', $request->body()->username())) {
-                    \session()->set('errors',
-                    !session()->has('errors') ? [] : [
+                    $error_username = [
                         'username' => $this->locales['create']['username_used']
-                    ]);
+                    ];
+                    
+                    \session()->set('errors',
+                    !session()->has('errors') 
+                    ? $error_username : \array_merge(session()->get('errors'), $error_username));
                 }
 
                 if (!$this->model->exists('id', $request->body()->id_acteur(), 'acteurs')) {
-                    \session()->set('errors',
-                    !session()->has('errors') ? [] : [
+                    $error_id_acteur = [
                         'id_acteur' => $this->locales['create']['id_acteur_invalid']
-                    ]);
+                    ];
+
+                    \session()->set('errors',
+                    !session()->has('errors') 
+                    ? $error_id_acteur : array_merge(session()->get('errors'), $error_id_acteur));
                 }
 
                 if (!session()->has('errors')) {

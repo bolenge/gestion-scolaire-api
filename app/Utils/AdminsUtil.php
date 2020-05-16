@@ -54,7 +54,7 @@
          * @var array
          */
         protected $rulesCreating = [
-            'id' => 'int',
+            'id' => 'required|int',
             'role' => 'required|min:3|max:100|alpha',
             'username' => 'required|min:3|max:100|alpha',
             'password' => 'required|min:6|alpha',

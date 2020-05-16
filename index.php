@@ -19,6 +19,9 @@
     $app->middleware('errors', function (Middleware $middleware) {
         $middleware->getError();
     });
+    $app->middleware('authApp', function (Middleware $authApp) {
+        $authApp->authorize();
+    });
     
     // Using routes
     $app->use('/', $apps);

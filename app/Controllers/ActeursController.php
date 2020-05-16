@@ -47,12 +47,6 @@
         public function createActeur(Request $request, Response $response)
         {
             if ($request->validator($this->rulesCreating)) {
-                if (!in_array($request->body()->sexe(), $this->sexes)) {
-                    \session()->set('errors',
-                    !session()->has('errors') ? [] : [
-                        'sexe' => $this->locales['create']['sexe_invalid']
-                    ]);
-                }
 
                 if (!session()->has('errors')) {
                     if (!empty($acteur = $this->save($request, $response))) {

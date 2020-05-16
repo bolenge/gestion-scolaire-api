@@ -49,7 +49,7 @@
         public function trackErrors()
         {
             if (session()->has('errors')) {
-                $errors = session('errors');
+                $errors = session()->get('errors');
                 $this->objetRetour['errors'] = $errors;
 
                 if (empty($this->objetRetour['message'])) {
