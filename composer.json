@@ -7,6 +7,9 @@
     },
     "require": {
         "zircote/swagger-php": "^3.0",
-        "ekolo/ekolo-framework": "^0.3.4"
+        "ekolo/ekolo-framework": "^0.3.4",
+        "silex/silex": "^2.3",
+        "monolog/monolog": "^2.0",
+        "symfony/twig-bridge": "^5.0"
     }
 }
