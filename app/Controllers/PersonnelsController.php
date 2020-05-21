@@ -45,10 +45,12 @@
             if ($request->validator($this->rulesCreating)) {
 
                 if (!$this->model->exists('id', $request->body()->id_acteur(), 'acteurs')) {
+                    $error_acteur = [ 'id_acteur' => $this->locales['create']['id_acteur_invalid']];
+                    
                     \session()->set('errors',
-                    !session()->has('errors') ? [] : [
-                        'id_acteur' => $this->locales['create']['id_acteur_invalid']
-                    ]);
+                    !session()->has('errors') 
+                    ? $error_acteur
+                    : array_merge(session()->get('errors'), $error_acteur));
                 }
 
                 $personnel = $this->model->findOne([
@@ -74,7 +76,7 @@
                     if (!empty($personnel = $this->save($request, $response))) {
                         $this->objetRetour['success'] = true;
                         $this->objetRetour['message'] = $this->locales['create']['success'];
-                        $this->objetRetour['results'] = $admin;
+                        $this->objetRetour['results'] = $personnel;
                     }else {
                         $this->objetRetour['message'] = $this->locales['create']['warning'];
                         session()->set('errors', [

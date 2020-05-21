@@ -863,6 +863,46 @@
                 }
             }
         },
+        "/personnels/gerants/createPersonnelGerant": {
+            "post": {
+                "tags": [
+                    "Personnels"
+                ],
+                "summary": "Permet de créer un nouveau personnel gérant d'une école",
+                "operationId": "App\\Controllers\\PersonnelsGerantsController::createPersonnelGerant",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/createPersonnelGerantRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/personnels/gerants/loginPersonnelGerant": {
+            "post": {
+                "tags": [
+                    "Personnels"
+                ],
+                "summary": "Permet de faire connecter un personnel gérant",
+                "operationId": "App\\Controllers\\PersonnelsGerantsController::loginPersonnelGerant",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/loginPersonnelGerantRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
         "/sousModules/createSousModule": {
             "post": {
                 "tags": [
@@ -1355,6 +1395,72 @@
                             ],
                             "type": "object",
                             "$ref": "#/components/schemas/module"
+                        }
+                    }
+                }
+            },
+            "createPersonnelGerantRequest": {
+                "description": "Les données à renseigner",
+                "required": true,
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "required": [
+                                "id_ecole",
+                                "id_personnel",
+                                "id_abonnement",
+                                "id_sous_module",
+                                "role",
+                                "username",
+                                "password"
+                            ],
+                            "properties": {
+                                "id_ecole": {
+                                    "type": "string"
+                                },
+                                "id_personnel": {
+                                    "type": "string"
+                                },
+                                "id_abonnement": {
+                                    "type": "string"
+                                },
+                                "id_sous_module": {
+                                    "type": "integer"
+                                },
+                                "role": {
+                                    "type": "integer"
+                                },
+                                "username": {
+                                    "type": "integer"
+                                },
+                                "password": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "loginPersonnelGerantRequest": {
+                "description": "Les données à renseigner",
+                "required": true,
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "required": [
+                                "username",
+                                "password"
+                            ],
+                            "properties": {
+                                "username": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
                         }
                     }
                 }

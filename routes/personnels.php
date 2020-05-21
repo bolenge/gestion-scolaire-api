@@ -14,4 +14,8 @@
     $router->get('/getListPersonnels', 'PersonnelsController@getListPersonnels');
     $router->get('/getPersonnelById/:id', 'PersonnelsController@getPersonnelById');
 
+    // Personnels gérants
+    $router->post('/gerants/createPersonnelGerant', 'PersonnelsGerantsController@createPersonnelGerant');
+    $router->post('/gerants/loginPersonnelGerant', 'PersonnelsGerantsController@loginPersonnelGerant');
+
     return $router;

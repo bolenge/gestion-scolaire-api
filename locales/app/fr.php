@@ -119,6 +119,7 @@
             '404' => "La route demandée n'existe pas (ou plus)"
         ],
 
+        // Clé de la langue liée aux personnels
         'personnels' => [
             "create" => [
                 'success' => "Personnel créé avec succès",
@@ -126,6 +127,8 @@
                 "id_acteur_invalid" => "ID acteur invalide",
                 "id_ecole_invalid" => "ID école invalide",
                 "matricule_used" => "Ce matricule est déjà utilisé par un autre personnel de cette école",
+                "username_used" => "Nom d'utilisateur déjà utilisé par un autre personnel de cette école",
+                "already_gerant_sous_module" => "Ce personnel est déjà assigné gérant de ce sous module",
             ],
 
             'update' => [
@@ -148,8 +151,17 @@
 
             "find" => [
                 "success" => "Personnel(s) trouvé(s) avec succès",
-                "nothing" => "Aucun personnel trouvé pour cet ID",
-                "invalid_id" => "Veuillez renseigner un ID du personnel valide"
+                "nothing" => "Aucun personnel trouvé",
+                "invalid_id" => "Veuillez renseigner un ID du personnel valide",
+                "invalid_unexists" => "Ce personnel n'est pas enregistré (n'existe pas)",
+            ],
+
+            // La langue pour la connexion
+            "login" => [
+                "invalid_password" => "Mot de passe incorrect",
+                "invalid_username" => "Nom d'utilisateur incorrect",
+                "invalid_password_or_username" => "Nom d'utilisateur ou mot de passe incorrect",
+                "success" => "Connexion reussie",
             ],
         ],
 
@@ -246,6 +258,7 @@
             "find" => [
                 "success" => "Sous module(s) trouvé(s) avec succès",
                 "nothing" => "Aucun sous module trouvé pour cet ID",
+                "unsubscribe" => "Vous n'avez pas souscrit à ce sous module",
                 "invalid_id" => "Veuillez renseigner un ID d'un sous module valide"
             ],
         ],
@@ -254,7 +267,7 @@
             "creating" => [
                 'success' => "Abonnement créé avec succès",
                 'warning' => "Une erreur est survenue lors de la création du abonnement ".$error_persiste,
-                'desactive' => "Ce abonnement a été désactivé, vous ne pouvez pas modifier ses données. Veuillez le réactiver avant de les modifier.",
+                'desactive' => "Cet abonnement a été désactivé, vous ne pouvez pas modifier ses données. Veuillez le réactiver avant de les modifier.",
                 'module_desactived' => "Vous ne pouvez pas lié un abonnement à un module désactivé",
                 'ecole_desactived' => "Vous ne pouvez pas lié un abonnement à une ecole désactivée",
             ],
@@ -282,6 +295,7 @@
             "find" => [
                 "success" => "abonnement(s) trouvé(s) avec succès",
                 "nothing" => "Aucun abonnement trouvé pour cet ID",
+                "unsubsribe" => "Vous n'avez pas souscrit à cet abonnement",
                 "invalid_id" => "Veuillez renseigner un ID d'un abonnement valide",
             ],
 
