@@ -134,7 +134,12 @@
             'update' => [
                 'success' => "Modification du personnel faite avec succès",
                 'warning' => "Une erreur est survenue lors de la mofication du personnel ".$error_persiste,
-                'desactive' => "Cet personnel a été désactivé, vous ne pouvez pas modifier ses données. Veuillez le réactiver avant de les modifier."
+                'desactive' => "Cet personnel a été désactivé, vous ne pouvez pas modifier ses données. Veuillez le réactiver avant de les modifier.",
+                'avatar_gerant_success' => "Mise à jour de l'avatar reussi",
+                'avatar_gerant_warning' => "Une erreur est survenue lors de la mise à jour de l'avatar",
+                'id_media_avatar_gerant_invalid' => "L'ID du média de l'avatar est invalide",
+                'password_success' => "Mot de passe modifié avec succès",
+                'password_warning' => "Une erreur est survenue lors de la modification du mot de passe"
             ],
 
             "desactive" => [
@@ -162,6 +167,7 @@
                 "invalid_username" => "Nom d'utilisateur incorrect",
                 "invalid_password_or_username" => "Nom d'utilisateur ou mot de passe incorrect",
                 "success" => "Connexion reussie",
+                "invalid_last_password" => "Ancien mot de passe incorrect",
             ],
         ],
 

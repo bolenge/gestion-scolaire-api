@@ -17,5 +17,7 @@
     // Personnels gérants
     $router->post('/gerants/createPersonnelGerant', 'PersonnelsGerantsController@createPersonnelGerant');
     $router->post('/gerants/loginPersonnelGerant', 'PersonnelsGerantsController@loginPersonnelGerant');
+    $router->put('/gerants/setPersonnelGerantAvatar', 'PersonnelsGerantsController@setPersonnelGerantAvatar');
+    $router->put('/gerants/setPersonnelGerantPassword', 'PersonnelsGerantsController@setPersonnelGerantPassword');
 
     return $router;

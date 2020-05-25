@@ -194,4 +194,138 @@
             $this->trackErrors();
             $response->json($this->objetRetour);
         }
+
+        /**
+         * Permet de modifier l'avatar du personnel gérant d'une école
+         * 
+         * @OA\Put(
+         *      path="/personnels/gerants/setPersonnelGerantAvatar",
+         *      tags={"Personnels"},
+         *      @OA\RequestBody(ref="#/components/requestBodies/setPersonnelGerantAvatarRequest"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function setPersonnelGerantAvatar(Request $request, Response $response)
+        {
+            if ($request->validator($this->rulesSetAvatar)) {
+                $personnel_gerant_exists = $this->model->findOne([
+                    'cond' => 'id_personnel="'.$request->body()->id_personnel().
+                        '" AND state="1"'
+                ], 'personnels_gerants');
+
+                if (!empty($personnel_gerant_exists)) {
+                    $media_avatar = $this->model->findOne([
+                        'cond' => 'id="'.$request->body()->id_media_avatar().
+                            '" AND state="1"'
+                    ], 'medias');
+
+                    if (!empty($media_avatar)) {
+                        $is_updated = $this->model->update([
+                            'id_media_avatar' => $media_avatar->id,
+                            'id_personnel' => $request->body()->id_personnel(),
+                        ], 'personnels_gerants', 'id_personnel');
+
+                        if ($is_updated) {
+                            $this->objetRetour['success'] = true;
+                            $this->objetRetour['message'] =  $this->locales['update']['avatar_gerant_success'];
+                            $this->objetRetour['results'] = [
+                                'id_personnel' => $request->body()->id_personnel(),
+                                'media_avatar' => $media_avatar
+                            ];
+                        }else {
+                            $this->objetRetour['message'] = $this->locales['update']['avatar_gerant_warning'];
+                            session()->set('errors', [
+                                'warning' => $this->locales['update']['avatar_gerant_warning']
+                            ]);
+                        }
+                    }else {
+                        $this->objetRetour['message'] = $this->locales['update']['id_media_avatar_gerant_invalid'];
+                        session()->set('errors', [
+                            'id_media_avatar' => $this->locales['update']['id_media_avatar_gerant_invalid']
+                        ]);
+                    }
+                }else {
+                    $error_personnel = [ 'id_personnel' => $this->locales['find']['invalid_unexists']];
+
+                    \session()->set('errors',
+                    !session()->has('errors') 
+                    ? $error_personnel
+                    : array_merge(session()->get('errors'), $error_personnel));
+                }
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
+
+        /**
+         * Permet de modifier le mot de passe du personnel gérant d'une école
+         * 
+         * @OA\Put(
+         *      path="/personnels/gerants/setPersonnelGerantPassword",
+         *      tags={"Personnels"},
+         *      @OA\RequestBody(ref="#/components/requestBodies/setPersonnelGerantPasswordRequest"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function setPersonnelGerantPassword(Request $request, Response $response)
+        {
+            if ($request->validator($this->rulesSetPassword)) {
+                $gerant = $this->model->findOne([
+                    'cond' => 'username="'.$request->body()->username().
+                        '" AND state="1"'
+                ], 'personnels_gerants');
+
+                if (!empty($gerant)) {
+                    if (\bcrypt_verify_password($request->body()->password(), $gerant->password)) {
+                        $is_updated = $this->model->update([
+                            'id' => $gerant->id,
+                            'password' => \bcrypt_hash_password($request->body()->get('new_password'))
+                        ]);
+
+                        if ($is_updated) {
+                            $this->objetRetour['success'] = true;
+                            $this->objetRetour['message'] = $this->locales['update']['password_success'];
+                            $this->objetRetour['results'] = $gerant;
+                        }else {
+                            \session()->set('errors', [
+                                'warning' => $this->locales['update']['password_warning']
+                            ]);
+                        }
+                    }else {
+                        $error_password_gerant = [
+                            'password' => $this->locales['login']['invalid_last_password']
+                        ];
+
+                        \session()->set('errors',
+                        !session()->has('errors') 
+                        ? $error_password_gerant 
+                        : \array_merge($error_password_gerant, \session()->get('errors')));
+                    }
+                }else {
+                    $error_gerant = [
+                        'warning' => $this->locales['create']['invalid_password_or_username']
+                    ];
+                    \session()->set('errors',
+                    !session()->has('errors') ? $error_gerant : \array_merge($error_gerant, \session()->get('errors')));
+                }
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
     }

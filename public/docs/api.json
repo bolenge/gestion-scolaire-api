@@ -903,6 +903,46 @@
                 }
             }
         },
+        "/personnels/gerants/setPersonnelGerantAvatar": {
+            "put": {
+                "tags": [
+                    "Personnels"
+                ],
+                "summary": "Permet de modifier l'avatar du personnel gérant d'une école",
+                "operationId": "App\\Controllers\\PersonnelsGerantsController::setPersonnelGerantAvatar",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/setPersonnelGerantAvatarRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/personnels/gerants/setPersonnelGerantPassword": {
+            "put": {
+                "tags": [
+                    "Personnels"
+                ],
+                "summary": "Permet de modifier le mot de passe du personnel gérant d'une école",
+                "operationId": "App\\Controllers\\PersonnelsGerantsController::setPersonnelGerantPassword",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/setPersonnelGerantPasswordRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
         "/sousModules/createSousModule": {
             "post": {
                 "tags": [
@@ -1457,6 +1497,56 @@
                                     "type": "string"
                                 },
                                 "password": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "setPersonnelGerantAvatarRequest": {
+                "description": "Les données à renseigner",
+                "required": true,
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "required": [
+                                "id_personnel",
+                                "id_media_avatar"
+                            ],
+                            "properties": {
+                                "id_personnel": {
+                                    "type": "integer"
+                                },
+                                "id_media_avatar": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "setPersonnelGerantPasswordRequest": {
+                "description": "Les données à renseigner",
+                "required": true,
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "required": [
+                                "username",
+                                "password",
+                                "new_password"
+                            ],
+                            "properties": {
+                                "username": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                },
+                                "new_password": {
                                     "type": "string"
                                 }
                             },

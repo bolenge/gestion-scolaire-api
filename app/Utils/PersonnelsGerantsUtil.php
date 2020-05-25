@@ -68,6 +68,52 @@
         ];
 
         /**
+         * @OA\RequestBody(
+         * 		request="setPersonnelGerantAvatarRequest",
+         * 		description="Les données à renseigner",
+         *		required=true,
+         *      @OA\MediaType(
+         *      	mediaType="application/x-www-form-urlencoded",
+         *          @OA\Schema(
+         *          	type="object",
+         *				required={"id_personnel", "id_media_avatar"},
+         *              @OA\Property(type="integer", property="id_personnel"),
+         *              @OA\Property(type="integer", property="id_media_avatar")
+         *         )
+         *     )
+         * )
+         */
+        protected $rulesSetAvatar = [
+            'id_personnel' => 'required|int',
+            'id_media_avatar' => 'required|int'
+        ];
+
+        /**
+         * @OA\RequestBody(
+         * 		request="setPersonnelGerantPasswordRequest",
+         * 		description="Les données à renseigner",
+         *		required=true,
+         *      @OA\MediaType(
+         *      	mediaType="application/x-www-form-urlencoded",
+         *          @OA\Schema(
+         *          	type="object",
+         *				required={"username", "password", "new_password"},
+         *              @OA\Property(type="string", property="username"),
+         *              @OA\Property(type="string", property="password"),
+         *              @OA\Property(type="string", property="new_password")
+         *         )
+         *     )
+         * )
+         * 
+         * @var array
+         */
+        protected $rulesSetPassword = [
+            'username' => 'required|alpha|min:2',
+            'password' => 'required|min:6|alpha',
+            'new_password' => 'required|min:6|alpha'
+        ];
+
+        /**
          * Réprésente le __construct de ce trait
          */
         public function traitPersonnelsGerantsUtilConstruct()
