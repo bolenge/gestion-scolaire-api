@@ -19,5 +19,6 @@
     $router->post('/gerants/loginPersonnelGerant', 'PersonnelsGerantsController@loginPersonnelGerant');
     $router->put('/gerants/setPersonnelGerantAvatar', 'PersonnelsGerantsController@setPersonnelGerantAvatar');
     $router->put('/gerants/setPersonnelGerantPassword', 'PersonnelsGerantsController@setPersonnelGerantPassword');
+    $router->put('/gerants/updatePersonnelGerant', 'PersonnelsGerantsController@updatePersonnelGerant');
 
     return $router;

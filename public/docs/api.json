@@ -553,6 +553,51 @@
                 }
             }
         },
+        "/eleves/createEleve": {
+            "post": {
+                "tags": [
+                    "Eleves"
+                ],
+                "summary": "Permet de créer un nouveau eleve d'une école",
+                "operationId": "App\\Controllers\\ElevesController::createEleve",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/createEleveRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/eleves/updateEleve/{id}": {
+            "put": {
+                "tags": [
+                    "Eleves"
+                ],
+                "summary": "Permet de modifier les données d'un admin",
+                "operationId": "App\\Controllers\\ElevesController::updateEleve",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/updateEleveRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
         "/medias/upload": {
             "post": {
                 "tags": [
@@ -932,6 +977,26 @@
                 "operationId": "App\\Controllers\\PersonnelsGerantsController::setPersonnelGerantPassword",
                 "requestBody": {
                     "$ref": "#/components/requestBodies/setPersonnelGerantPasswordRequest"
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/personnels/gerants/updatePersonnelGerant": {
+            "put": {
+                "tags": [
+                    "Personnels"
+                ],
+                "summary": "Permet de modifier les infos d'un personnel gérant d'une école",
+                "operationId": "App\\Controllers\\PersonnelsGerantsController::updatePersonnelGerant",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/updatePersonnelGerantRequest"
                 },
                 "responses": {
                     "200": {
@@ -1397,6 +1462,60 @@
                     }
                 }
             },
+            "createEleveRequest": {
+                "description": "Les données à renseigner",
+                "required": true,
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "required": [
+                                "id_ecole",
+                                "matricule",
+                                "id_acteur"
+                            ],
+                            "properties": {
+                                "matricule": {
+                                    "type": "string"
+                                },
+                                "id_ecole": {
+                                    "type": "integer"
+                                },
+                                "id_acteur": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "updateEleveRequest": {
+                "description": "Les données à renseigner",
+                "required": true,
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "required": [
+                                "id_ecole",
+                                "matricule",
+                                "id_acteur"
+                            ],
+                            "properties": {
+                                "id_ecole": {
+                                    "type": "integer"
+                                },
+                                "id_acteur": {
+                                    "type": "integer"
+                                },
+                                "matricule": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
             "createMediaRequest": {
                 "description": "Les données à renseigner",
                 "required": true,
@@ -1455,6 +1574,53 @@
                                 "password"
                             ],
                             "properties": {
+                                "id_ecole": {
+                                    "type": "string"
+                                },
+                                "id_personnel": {
+                                    "type": "string"
+                                },
+                                "id_abonnement": {
+                                    "type": "string"
+                                },
+                                "id_sous_module": {
+                                    "type": "integer"
+                                },
+                                "role": {
+                                    "type": "integer"
+                                },
+                                "username": {
+                                    "type": "integer"
+                                },
+                                "password": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "updatePersonnelGerantRequest": {
+                "description": "Les données à renseigner",
+                "required": true,
+                "content": {
+                    "application/x-www-form-urlencoded": {
+                        "schema": {
+                            "required": [
+                                "id_ecole",
+                                "id_personnel",
+                                "id_abonnement",
+                                "id_sous_module",
+                                "role",
+                                "username",
+                                "password",
+                                "id"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
                                 "id_ecole": {
                                     "type": "string"
                                 },

@@ -86,7 +86,8 @@
             "find" => [
                 "success" => "Ecole(s) trouvée(s) avec succès",
                 "nothing" => "Aucune école trouvée pour cet ID",
-                "invalid_id" => "Veuillez renseigner un ID de l'école valide"
+                "invalid_id" => "Veuillez renseigner un ID de l'école valide",
+                "unexists" => "Cette école n'existe pas" 
             ],
         ],
 
@@ -311,5 +312,36 @@
                 "invalid_id_ecole_abonneent" => "Cette école n'a souscrit à cet abonnement",
                 "warning" => "Une erreur est survenue lors de l'activation de l'abonnement ".$error_persiste,
             ]
+        ],
+
+        'eleves' => [
+            "creating" => [
+                'success' => "Inscription élève reussie",
+                'warning' => "Une erreur est survenue lors de 'inscription de l'élève ".$error_persiste,
+                'already_exists' => "Cet élève semble déjà être enregistré ou matricule déjà utilisé"
+            ],
+
+            'updating' => [
+                'success' => "Modification faite avec succès",
+                'warning' => "Une erreur est survenue lors de la mofication ".$error_persiste,
+            ],
+
+            "desactive" => [
+                "already_desactived" => "Cet enregistrement est déjà désactivé",
+                "success" => "Désactivation effectuée avec succès",
+                "warning" => "Une erreur est survenue lors de la désactivation ".$error_persiste,
+            ],
+
+            "active" => [
+                "already_actived" => "Cet enregistrement est déjà activé",
+                "success" => "Activation effectuée avec succès",
+                "warning" => "Une erreur est survenue lors de la l'activation ".$error_persiste,
+            ],
+
+            "find" => [
+                "success" => "Enregistrement(s) trouvé(s) avec succès",
+                "nothing" => "Aucun enregistrement trouvé pour cet ID",
+                "invalid_id" => "Veuillez renseigner un ID de l'enregistrement valide"
+            ],
         ],
     ];

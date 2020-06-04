@@ -14,6 +14,7 @@
     $modules  = require './routes/modules.php';
     $sous_modules  = require './routes/sous_modules.php';
     $abonnements  = require './routes/abonnements.php';
+    $eleves  = require './routes/eleves.php';
 
     // Middlewares
     $app->middleware('errors', function (Middleware $middleware) {
@@ -33,3 +34,4 @@
     $app->use('/modules', $modules);
     $app->use('/sousModules', $sous_modules);
     $app->use('/abonnements', $abonnements);
+    $app->use('/eleves', $eleves);

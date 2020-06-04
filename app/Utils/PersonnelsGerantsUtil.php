@@ -46,6 +46,42 @@
 
         /**
          * @OA\RequestBody(
+         * 		request="updatePersonnelGerantRequest",
+         * 		description="Les données à renseigner",
+         *		required=true,
+         *      @OA\MediaType(
+         *      	mediaType="application/x-www-form-urlencoded",
+         *          @OA\Schema(
+         *          	type="object",
+         *				required={"id_ecole", "id_personnel", "id_abonnement", "id_sous_module", "role", "username", "password", "id"},
+         *              @OA\Property(type="string", property="id"),
+         *              @OA\Property(type="string", property="id_ecole"),
+         *              @OA\Property(type="string", property="id_personnel"),
+         *              @OA\Property(type="string", property="id_abonnement"),
+         *              @OA\Property(type="integer", property="id_sous_module"),
+         *              @OA\Property(type="integer", property="role"),
+         *              @OA\Property(type="integer", property="username"),
+         *              @OA\Property(type="integer", property="password")
+         *         )
+         *     )
+         * )
+         * 
+         * @var array
+         */
+        protected $rulesUpdating = [
+            'id' => 'int',
+            'id_ecole' => 'required|int',
+            'id_personnel' => 'required|int',
+            'id_abonnement' => 'required|int',
+            'id_sous_module' => 'required|int',
+            'id_media_avatar' => 'int',
+            'role' => 'required|min:3|max:200|alpha',
+            'username' => 'required|min:3|max:200',
+            'password' => 'required|min:6|alpha'
+        ];
+
+        /**
+         * @OA\RequestBody(
          * 		request="loginPersonnelGerantRequest",
          * 		description="Les données à renseigner",
          *		required=true,

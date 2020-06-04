@@ -4,6 +4,7 @@
      */
 
     use Ekolo\Framework\Bootstrap\Config;
+    use Ekolo\Framework\Http\Request;
 
     if (!function_exists('locales')) {
         /**
@@ -34,5 +35,15 @@
          */
         function base_path(){
             return (new Config)->basePath();
+        }
+    }
+
+    if (!function_exists('request')) {
+        /**
+         * Renvoi l'instance de Ekolo\Framework\Http\Request
+         * @return Request
+         */
+        function request(){
+            return new Request;
         }
     }
