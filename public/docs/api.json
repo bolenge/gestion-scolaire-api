@@ -598,6 +598,50 @@
                 }
             }
         },
+        "/eleves/desactiveEleve/{id}": {
+            "put": {
+                "tags": [
+                    "Eleves"
+                ],
+                "summary": "Permet de désactiver un eleve",
+                "operationId": "App\\Controllers\\ElevesController::desactiveEleve",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/eleves/activeEleve/{id}": {
+            "put": {
+                "tags": [
+                    "Eleves"
+                ],
+                "summary": "Permet de d'activer un eleve",
+                "operationId": "App\\Controllers\\ElevesController::activeEleve",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
         "/medias/upload": {
             "post": {
                 "tags": [

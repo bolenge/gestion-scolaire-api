@@ -8,5 +8,7 @@
 
     $router->post('/createEleve', 'ElevesController@createEleve');
     $router->put('/updateEleve/:id', 'ElevesController@updateEleve');
+    $router->put('/desactiveEleve/:id', 'ElevesController@desactiveEleve');
+    $router->put('/activeEleve/:id', 'ElevesController@activeEleve');
 
     return $router;

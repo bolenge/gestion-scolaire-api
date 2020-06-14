@@ -185,4 +185,123 @@
             $response->json($this->objetRetour);
         }
 
+        /**
+         * Permet de désactiver un eleve
+         * 
+         * @OA\Put(
+         *      path="/eleves/desactiveEleve/{id}",
+         *      tags={"Eleves"},
+         *      @OA\Parameter(ref="#/components/parameters/id"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function desactiveEleve(Request $request, Response $response)
+        {   
+            $request->body()->set('id', $request->params()->get('id'));
+            
+            if ($request->validator($this->rulesCreating)) {
+                $eleve = $this->model->findOne([
+                    'cond' => 'id='.$request->body()->get('id').
+                        ' AND flag="1"'
+                ]);
+                
+                if (!empty($eleve)) {
+                    
+                    if ($eleve->state == "0") {
+                        session()->set('errors', [
+                            'warning' => $this->locales['desactive']['already_desactived']
+                        ]);
+                    }else {
+                        $result = $this->model->update([
+                            'id' => $request->body()->get('id'),
+                            'state' => "0"
+                        ]);
+
+                        if ($result) {
+                            $this->objetRetour['success'] = true;
+                            $this->objetRetour['message'] = $this->locales['desactive']['success'];
+                            $this->objetRetour['results'] = $result;
+                        }else {
+                            session()->set('errors', [
+                                'warning' => $this->locales['desactive']['warning']
+                            ]);
+                        }
+                    }
+                }else {
+                    \session()->set('errors', [
+                        'warning' => $this->locales['find']['nothing']
+                    ]);
+                }
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
+
+        /**
+         * Permet de d'activer un eleve
+         * 
+         * @OA\Put(
+         *      path="/eleves/activeEleve/{id}",
+         *      tags={"Eleves"},
+         *      @OA\Parameter(ref="#/components/parameters/id"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function activeEleve(Request $request, Response $response)
+        {   
+            $request->body()->set('id', $request->params()->get('id'));
+            
+            if ($request->validator($this->rulesCreating)) {
+                $eleve = $this->model->findOne([
+                    'cond' => 'id='.$request->body()->get('id').
+                        ' AND flag="1"'
+                ]);
+
+                if (!empty($eleve)) {
+                    if ($eleve->state == "1") {
+                        session()->set('errors', [
+                            'warning' => $this->locales['active']['already_actived']
+                        ]);
+                    }else {
+                        $result = $this->model->update([
+                            'id' => $request->body()->get('id'),
+                            'state' => "1"
+                        ]);
+
+                        if ($result) {
+                            $eleve->state = "1";
+                            $this->objetRetour['success'] = true;
+                            $this->objetRetour['message'] = $this->locales['active']['success'];
+                            $this->objetRetour['results'] = $eleve;
+                        }else {
+                            session()->set('errors', [
+                                'warning' => $this->locales['active']['warning']
+                            ]);
+                        }
+                    }
+                }else {
+                    \session()->set('errors', [
+                        'warning' => $this->locales['find']['nothing']
+                    ]);
+                }
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
     }
