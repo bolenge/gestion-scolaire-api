@@ -54,15 +54,21 @@
                 }
 
                 $personnel = $this->model->findOne([
-                    'cond' => 'matricule="'.$request->body()->matricule().
-                        '" AND id_ecole='.$request->body()->id_ecole()
+                    'cond' => '(id_acteur='.$request->body()->id_acteur().
+                        ' AND id_ecole='.$request->body()->id_ecole().
+                        ') OR (id_ecole='.$request->body()->id_ecole().
+                        ' AND matricule="'.$request->body()->id_ecole().'")'
                 ], 'eleves');
 
                 if (!empty($personnel)) {
+                    $error = [
+                        'warning' => $this->locales['creating']['already_exists']
+                    ];
+
                     \session()->set('errors',
-                    !session()->has('errors') ? [] : [
-                        'matricule' => $this->locales['create']['already_exists']
-                    ]);
+                    !session()->has('errors') 
+                    ? $error 
+                    : \array_merge(\session()->get('errors'), $error));
                 }
 
                 if (!$this->model->exists('id', $request->body()->id_ecole(), 'ecoles')) {
@@ -124,26 +130,31 @@
                 if (!empty($eleve)) {
                     $eleve_for_matricule = $this->model->findOne([
                         'cond' => 'matricule="'.$request->body()->matricule().
-                            '" AND flag="1"'
+                            '" AND flag="1" 
+                            AND id != '.$request->body('id').
+                            ' AND id_ecole='.$request->body('id_ecole')
                     ], 'eleves');
-
-                    if (empty($eleve_for_matricule)) {
-                        $eleve_for_matricule = new \stdClass;
-                        $eleve_for_matricule->id = null;
-                    }
     
-                    if ($eleve_for_matricule->id == $eleve->id) {
+                    if (!empty($eleve_for_matricule)) {
+                        $error = [
+                            'matricule' => $this->locales['creating']['matricule_used']
+                        ];
+
                         \session()->set('errors',
-                        !session()->has('errors') ? [] : [
-                            'matricule' => $this->locales['create']['matricule_used']
-                        ]);
+                        !session()->has('errors') 
+                        ? $error 
+                        : array_merge($error, \session()->get('errors')));
                     }
     
                     if (!$this->model->exists('id', $request->body()->id_ecole(), 'ecoles')) {
-                        \session()->set('errors',
-                        !session()->has('errors') ? [] : [
+                        $error = [
                             'id_ecole' => $this->locales['create']['id_ecole_invalid']
-                        ]);
+                        ];
+
+                        \session()->set('errors',
+                        !session()->has('errors') 
+                        ? $error 
+                        : array_merge($error, session()->get('errors')));
                     }
     
                     if (!session()->has('errors')) {
@@ -158,6 +169,15 @@
                             ]);
                         }
                     }
+                }else {
+                    $error = [
+                        'id_acteur' => locales('app')['acteurs']['find']['nothing']
+                    ];
+
+                    \session()->set('errors', 
+                    \session()->has('errors')
+                    ? array_merge($error, \session()->get('errors'))
+                    : $error);
                 }
             }
 

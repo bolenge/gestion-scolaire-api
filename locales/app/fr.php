@@ -318,7 +318,8 @@
             "creating" => [
                 'success' => "Inscription élève reussie",
                 'warning' => "Une erreur est survenue lors de 'inscription de l'élève ".$error_persiste,
-                'already_exists' => "Cet élève semble déjà être enregistré ou matricule déjà utilisé"
+                'already_exists' => "Cet élève semble déjà être enregistré ou matricule déjà utilisé",
+                'matricule_used' => "Ce matricule est déjà utilisé par un autre élève"
             ],
 
             'updating' => [
