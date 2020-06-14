@@ -211,7 +211,7 @@
                     'cond' => 'id='.$request->body()->get('id').
                         ' AND flag="1"'
                 ]);
-                
+
                 if (!empty($eleve)) {
                     
                     if ($eleve->state == "0") {
@@ -299,6 +299,207 @@
                         'warning' => $this->locales['find']['nothing']
                     ]);
                 }
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
+
+        /**
+         * Permet de supprimer un eleve
+         * 
+         * @OA\Delete(
+         *      path="/eleves/deleteEleve/{id}",
+         *      tags={"Eleves"},
+         *      @OA\Parameter(ref="#/components/parameters/id"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function deleteEleve(Request $request, Response $response)
+        {   
+            $request->body()->set('id', $request->params()->get('id'));
+            
+            if ($request->validator($this->rulesCreating)) {
+                $eleve = $this->model->findOne([
+                    'cond' => 'id='.$request->body()->get('id').
+                        ' AND flag="1"'
+                ]);
+                
+                if (!empty($eleve)) {
+                    $result = $this->model->update([
+                        'id' => $request->body()->get('id'),
+                        'flag' => "0"
+                    ]);
+
+                    if ($result) {
+                        $this->objetRetour['success'] = true;
+                        $this->objetRetour['message'] = $this->locales['delete']['success'];
+                        $this->objetRetour['results'] = $result;
+                    }else {
+                        session()->set('errors', [
+                            'warning' => $this->locales['delete']['warning']
+                        ]);
+                    }
+                }else {
+                    \session()->set('errors', [
+                        'warning' => $this->locales['find']['nothing']
+                    ]);
+                }
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
+
+        /**
+         * Permet de restaurer un eleve
+         * 
+         * @OA\Put(
+         *      path="/eleves/restoreEleve/{id}",
+         *      tags={"Eleves"},
+         *      @OA\Parameter(ref="#/components/parameters/id"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function restoreEleve(Request $request, Response $response)
+        {   
+            $request->body()->set('id', $request->params()->get('id'));
+            
+            if ($request->validator($this->rulesCreating)) {
+                $eleve = $this->model->findOne([
+                    'cond' => 'id='.$request->body()->get('id')
+                ]);
+                
+                if (!empty($eleve)) {
+                    $result = $this->model->update([
+                        'id' => $request->body()->get('id'),
+                        'flag' => "1"
+                    ]);
+
+                    if ($result) {
+                        $this->objetRetour['success'] = true;
+                        $this->objetRetour['message'] = $this->locales['restore']['success'];
+                        $this->objetRetour['results'] = $result;
+                    }else {
+                        session()->set('errors', [
+                            'warning' => $this->locales['restore']['warning']
+                        ]);
+                    }
+                }else {
+                    \session()->set('errors', [
+                        'warning' => $this->locales['find']['nothing']
+                    ]);
+                }
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
+
+        /**
+         * @OA\Get(
+         *      path="/eleves/getListEleves/{limit}/{offset}",
+         *      description="Renvoi la liste des eleves avec limit et offset",
+         *      tags={"Eleves"},
+         *      @OA\Parameter(ref="#/components/parameters/limit"),
+         *      @OA\Parameter(ref="#/components/parameters/offset"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         * 
+         * @OA\Get(
+         *      path="/eleves/getListEleves",
+         *      description="Renvoi la liste des eleves",
+         *      tags={"Eleves"},
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function getListEleves(Request $request, Response $response)
+        {
+            $limit  = \is_int_valid($request->params()->get('limit')) ? $request->params()->get('limit') : 10;
+            $offset = $request->params()->has('offset') ? (int) $request->params()->get('offset') : 0;
+
+            $eleves = $this->model->findAllEleves($limit, $offset);
+
+            if (!empty($eleves)) {
+                $this->objetRetour['success'] = true;
+                $this->objetRetour['message'] = count($eleves).' '.$this->locales['find']['success'];
+                $this->objetRetour['results'] = $eleves;
+            }else {
+                \session('errors', [
+                    'warning' => $this->locales['find']['nothing']
+                ]);
+            }
+
+            $this->trackErrors();
+            $response->json($this->objetRetour);
+        }
+
+        /**
+         * Renvoi les informations d'un élève
+         * 
+         * @OA\Get(
+         *      path="/eleves/getEleveById/{id}",
+         *      tags={"Eleves"},
+         *      @OA\Parameter(ref="#/components/parameters/id"),
+         *      @OA\Response(
+         *          response="200",
+         *          ref="#/components/responses/SuccessResponse"
+         *      ),
+         *      @OA\Response(
+         *          response="404",
+         *          ref="#/components/responses/NotFoundResponse"
+         *      )
+         * )
+         */
+        public function getEleveById(Request $request, Response $response)
+        {
+            if ($request->params()->has('id') && \is_int_valid($request->params()->get('id'))) {
+                $eleve = $this->model->findOne([
+                    'cond' => 'flag="1"
+                        AND id='.$request->params()->get('id')
+                ]);
+
+                if (!empty($eleve)) {
+                    $this->objetRetour['success'] = true;
+                    $this->objetRetour['message'] = $this->locales['find']['success'];
+                    $this->objetRetour['results'] = $eleve;
+                }else {
+                    \session('errors', [
+                        'warning' => $this->locales['find']['nothing']
+                    ]);
+                }
+            }else {
+                \session('errors', [
+                    'warning' => $this->locales['find']['invalid_id']
+                ]);
             }
 
             $this->trackErrors();

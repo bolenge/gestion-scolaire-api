@@ -344,5 +344,17 @@
                 "nothing" => "Aucun élève trouvé pour cet ID",
                 "invalid_id" => "Veuillez renseigner un ID de l'élève valide"
             ],
+
+            "delete" => [
+                "already_deleted" => "Cet élève est déjà supprimé",
+                "success" => "Suppression effectuée avec succès",
+                "warning" => "Une erreur est survenue lors de la suppression ".$error_persiste,
+            ],
+
+            "restore" => [
+                "already_restored" => "Cet élève est déjà restauré",
+                "success" => "Restauration effectuée avec succès",
+                "warning" => "Une erreur est survenue lors de la restauration ".$error_persiste,
+            ],
         ],
     ];

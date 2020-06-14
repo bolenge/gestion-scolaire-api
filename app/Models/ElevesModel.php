@@ -23,6 +23,7 @@
         public function findAllEleves(int $limit = 10, int $offset = 0)
         {
             return $this->findAll([
+                'cond' => 'flag="1"',
                 'limit' => $limit.' OFFSET '.$offset
             ]);
         }

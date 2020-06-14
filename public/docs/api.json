@@ -642,6 +642,114 @@
                 }
             }
         },
+        "/eleves/deleteEleve/{id}": {
+            "delete": {
+                "tags": [
+                    "Eleves"
+                ],
+                "summary": "Permet de supprimer un eleve",
+                "operationId": "App\\Controllers\\ElevesController::deleteEleve",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/eleves/restoreEleve/{id}": {
+            "put": {
+                "tags": [
+                    "Eleves"
+                ],
+                "summary": "Permet de restaurer un eleve",
+                "operationId": "App\\Controllers\\ElevesController::restoreEleve",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/eleves/getListEleves/{limit}/{offset}": {
+            "get": {
+                "tags": [
+                    "Eleves"
+                ],
+                "description": "Renvoi la liste des eleves avec limit et offset",
+                "operationId": "App\\Controllers\\ElevesController::getListEleves",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#/components/parameters/offset"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/eleves/getListEleves": {
+            "get": {
+                "tags": [
+                    "Eleves"
+                ],
+                "description": "Renvoi la liste des eleves",
+                "operationId": "App\\Controllers\\ElevesController::getListEleves",
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
+        "/eleves/getEleveById/{id}": {
+            "get": {
+                "tags": [
+                    "Eleves"
+                ],
+                "summary": "Renvoi les informations d'un eleve",
+                "operationId": "App\\Controllers\\ElevesController::getEleveById",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/SuccessResponse"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFoundResponse"
+                    }
+                }
+            }
+        },
         "/medias/upload": {
             "post": {
                 "tags": [
